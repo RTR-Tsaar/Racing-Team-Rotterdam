@@ -1,3 +1,0 @@
-../Core/Src/throttle.cpp:12:1:Throttle::Throttle()	16	static
-../Core/Src/throttle.cpp:17:6:void Throttle::initADC()	16	static
-../Core/Src/throttle.cpp:22:5:int Throttle::readThrottle()	24	static
