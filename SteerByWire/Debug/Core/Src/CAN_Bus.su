@@ -1,0 +1,5 @@
+../Core/Src/CAN_Bus.cpp:10:1:CANBus::CANBus()	16	static
+../Core/Src/CAN_Bus.cpp:14:6:void CANBus::start(CAN_HandleTypeDef*)	16	static
+../Core/Src/CAN_Bus.cpp:31:6:void CANBus::transmit(CAN_HandleTypeDef*, uint8_t*, uint16_t)	24	static
+../Core/Src/CAN_Bus.cpp:37:6:void CANBus::configureFilter(CAN_HandleTypeDef*, uint16_t, uint16_t, uint8_t, uint8_t)	64	static
+../Core/Src/CAN_Bus.cpp:74:6:void CANBus::error(CAN_HandleTypeDef*, uint16_t)	24	static
