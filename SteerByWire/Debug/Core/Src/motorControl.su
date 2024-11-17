@@ -1,0 +1,5 @@
+../Core/Src/motorControl.cpp:12:1:MotorControl::MotorControl(TIM_HandleTypeDef*, uint32_t, GPIO_TypeDef*, uint16_t, int, int, int)	24	static
+../Core/Src/motorControl.cpp:21:6:void MotorControl::setSpeedAndDirection(int, int)	24	static
+../Core/Src/motorControl.cpp:30:6:void MotorControl::rampToSpeed(int, int)	40	static
+../Core/Src/motorControl.cpp:47:6:void MotorControl::stopMotorGradually()	24	static
+../Core/Src/motorControl.cpp:57:6:void MotorControl::steerToAngle(int, int)	40	static

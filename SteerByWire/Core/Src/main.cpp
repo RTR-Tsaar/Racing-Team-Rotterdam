@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "CAN_Bus.hpp"
+#include "motorControl.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
