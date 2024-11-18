@@ -9,30 +9,23 @@
 #define INC_MOTORCONTROL_HPP_
 
 #include "stm32f1xx_hal.h"
-#include "main.hpp"
+//#include "main.hpp"
 
 class MotorControl {
-private:
-    TIM_HandleTypeDef *pwmTimer;
-    uint32_t pwmChannel;
-    GPIO_TypeDef *dirPort;
-    uint16_t dirPin;
-
-    const int maxPwmValue;
-    const int speedIncrement;
-    const int rampDelayMs;
-
-    void setSpeedAndDirection(int speed, int direction);
-    void rampToSpeed(int targetSpeed, int direction);
-
 public:
-    // Constructor
-    MotorControl(TIM_HandleTypeDef *timer, uint32_t pwmCh, GPIO_TypeDef *gpioPort, uint16_t gpioPin,
-                 int maxPwm = 1000, int increment = 10, int rampDelay = 5);
+    MotorControl(TIM_HandleTypeDef* timer, uint32_t channel);
 
-    // Public interface
-    void steerToAngle(int currentAngle, int targetAngle);
-    void stopMotorGradually();
+    void start();
+    void rampDutyCycle(uint16_t start, uint16_t end, uint16_t delayMs);
+    void setDutyCycle(uint16_t dutyCycle);
+
+    void steerToAngle(uint8_t currentAngle, uint8_t targetAngle);
+
+
+private:
+    TIM_HandleTypeDef* htim;
+    uint32_t channel;
+
 };
 
 

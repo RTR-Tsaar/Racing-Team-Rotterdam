@@ -9,7 +9,7 @@
 #define INC_CAN_BUS_HPP_
 
 #include "stm32f1xx_hal.h"
-#include "main.hpp"
+//#include "main.hpp"
 
 class CANBus {
 
