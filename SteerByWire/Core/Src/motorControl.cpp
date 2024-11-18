@@ -7,41 +7,47 @@
 
 #include "motorControl.hpp"
 
-//constructor
+// Constructor
 MotorControl::MotorControl(TIM_HandleTypeDef* timer, uint32_t channel)
-    : htim(timer), channel(channel) {}
+    : htim(timer), channel(channel), lastDirection(GPIO_PIN_RESET) {}
 
-//starts PWM
+// Starts PWM
 void MotorControl::start() {
     HAL_TIM_PWM_Start(htim, channel);
 }
 
-//sets steer speed
+// Sets steer speed
 void MotorControl::setDutyCycle(uint16_t dutyCycle) {
     __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle);
 }
 
-//ramps up steer speed to prevent jerking action
+// Ramps up steer speed to prevent jerking action
 void MotorControl::rampDutyCycle(uint16_t start, uint16_t end, uint16_t delayMs) {
-        for (uint16_t duty = start; duty <= end; duty+=10) {
-            setDutyCycle(duty);
-            HAL_Delay(delayMs);
-        }
-//		setDutyCycle(0);
+    for (uint16_t duty = start; duty <= end; duty += 10) {
+        setDutyCycle(duty);
+        HAL_Delay(delayMs);
+    }
 }
 
+// Steers to target angle; ramps up only when changing direction and maintains speed afterward
+void MotorControl::steerToAngle(uint8_t currentAngle, uint8_t targetAngle) {
+    GPIO_PinState currentDirection;
 
-//steers to target angle, when target angle is reached it stops steering
-void MotorControl::steerToAngle(uint8_t currentAngle, uint8_t targetAngle){
-	if (currentAngle>targetAngle) {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-		rampDutyCycle(0, 6553, 1);
-	}
-	else if (currentAngle<targetAngle){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
-		rampDutyCycle(0, 6553, 1);
-	}
-	else {
-		setDutyCycle(0);
-	}
+    if (currentAngle > targetAngle) {
+        currentDirection = GPIO_PIN_RESET;
+    } else if (currentAngle < targetAngle) {
+        currentDirection = GPIO_PIN_SET;
+    } else {
+        setDutyCycle(0); // Stop steering if the current angle matches the target angle
+        return;
+    }
+
+    // Check if direction has changed
+    if (currentDirection != lastDirection) {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, currentDirection); // Change direction
+        rampDutyCycle(0, 6553, 1); // Ramp up speed after changing direction
+        lastDirection = currentDirection; // Update the last direction
+    } else {
+        setDutyCycle(6553); // Maintain stable speed if direction has not changed
+    }
 }

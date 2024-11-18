@@ -25,7 +25,7 @@ public:
 private:
     TIM_HandleTypeDef* htim;
     uint32_t channel;
-
+    GPIO_PinState lastDirection;
 };
 
 
