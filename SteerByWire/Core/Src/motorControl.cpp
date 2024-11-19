@@ -9,45 +9,47 @@
 
 // Constructor
 MotorControl::MotorControl(TIM_HandleTypeDef* timer, uint32_t channel)
-    : htim(timer), channel(channel), lastDirection(GPIO_PIN_RESET) {}
+    : htim(timer), channel(channel), lastDirection(GPIO_PIN_SET),
+      kp(1.0f), ki(0.1f), kd(0.01f), integral(0), previousError(0) {}
 
 // Starts PWM
 void MotorControl::start() {
     HAL_TIM_PWM_Start(htim, channel);
 }
 
-// Sets steer speed
+// Sets steer speed (duty cycle)
 void MotorControl::setDutyCycle(uint16_t dutyCycle) {
     __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle);
 }
 
-// Ramps up steer speed to prevent jerking action
-void MotorControl::rampDutyCycle(uint16_t start, uint16_t end, uint16_t delayMs) {
-    for (uint16_t duty = start; duty <= end; duty += 10) {
-        setDutyCycle(duty);
-        HAL_Delay(delayMs);
-    }
+// PID controller implementation
+int32_t MotorControl::calculatePID(uint8_t targetAngle, uint8_t currentAngle) {
+    float error = (float)targetAngle - (float)currentAngle;
+
+    // PID calculations
+    integral += error;
+    float derivative = error - previousError;
+    float output = (kp * error) + (ki * integral) + (kd * derivative);
+
+    // Constrain output to valid range
+    if (output > 65535) output = 65535;
+    if (output < -65535) output = -65535;
+
+    previousError = error;
+    return static_cast<int32_t>(output);
 }
 
-// Steers to target angle; ramps up only when changing direction and maintains speed afterward
+// Steers to target angle using PID
 void MotorControl::steerToAngle(uint8_t currentAngle, uint8_t targetAngle) {
-    GPIO_PinState currentDirection;
+    // Calculate PID output
+    int32_t pidOutput = calculatePID(targetAngle, currentAngle);
 
-    if (currentAngle > targetAngle) {
-        currentDirection = GPIO_PIN_RESET;
-    } else if (currentAngle < targetAngle) {
-        currentDirection = GPIO_PIN_SET;
+    // Determine direction and apply PWM
+    if (pidOutput < 0) {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // Change to one direction
+        setDutyCycle(static_cast<uint16_t>(-pidOutput));      // Use absolute value of PID
     } else {
-        setDutyCycle(0); // Stop steering if the current angle matches the target angle
-        return;
-    }
-
-    // Check if direction has changed
-    if (currentDirection != lastDirection) {
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, currentDirection); // Change direction
-        rampDutyCycle(0, 6553, 1); // Ramp up speed after changing direction
-        lastDirection = currentDirection; // Update the last direction
-    } else {
-        setDutyCycle(6553); // Maintain stable speed if direction has not changed
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);   // Change to the other direction
+        setDutyCycle(static_cast<uint16_t>(pidOutput));
     }
 }
