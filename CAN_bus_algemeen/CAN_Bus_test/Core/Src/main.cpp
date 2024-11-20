@@ -156,9 +156,9 @@ int main(void)
 
   uint8_t trump[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
 
-  canBus.start(&hcan);
-
-
+  canBus.start(&hcan, CAN_ID_STD);
+//  canBus.error(&hcan, 2047);
+//  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -232,7 +232,7 @@ static void MX_CAN_Init(void)
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 36;
-  hcan.Init.Mode = CAN_MODE_NORMAL;
+  hcan.Init.Mode = CAN_MODE_NORMAL; // Canbus normal mode = CAN_MODE_NORMAL, canbus loopback mode = CAN_MODE_LOOPBACK
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
