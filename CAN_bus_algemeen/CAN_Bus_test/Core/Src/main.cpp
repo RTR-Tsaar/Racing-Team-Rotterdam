@@ -46,6 +46,7 @@ CAN_HandleTypeDef hcan;
 /* USER CODE BEGIN PV */
 CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
 uint8_t RxData[8];
+uint32_t can_id;
 
 typedef struct {
     uint8_t error_warning_flag;
@@ -73,6 +74,9 @@ static void MX_CAN_Init(void);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+
+
 }
 
 void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
@@ -166,11 +170,11 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-//	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
-//	canBus.transmit(&hcan, trump, 446);
-//	HAL_Delay(100);
-//	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
-//	HAL_Delay(1000);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
+	canBus.transmit(&hcan, trump, 446);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
+	HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -232,7 +236,7 @@ static void MX_CAN_Init(void)
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 36;
-  hcan.Init.Mode = CAN_MODE_NORMAL; // Canbus normal mode = CAN_MODE_NORMAL, canbus loopback mode = CAN_MODE_LOOPBACK
+  hcan.Init.Mode = CAN_MODE_LOOPBACK; // Canbus normal mode = CAN_MODE_NORMAL, canbus loopback mode = CAN_MODE_LOOPBACK
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_1TQ;

@@ -35,7 +35,7 @@ void CANBus::start(CAN_HandleTypeDef* hcan, uint8_t LIDEE){
 
 // Transmit data
 void CANBus::transmit(CAN_HandleTypeDef* hcan, uint8_t* TxData, uint16_t id) {
-    if (TxHeader.IDE = CAN_ID_STD){
+    if (TxHeader.IDE == CAN_ID_STD){
     	TxHeader.StdId = id;
     }
     else{
@@ -67,4 +67,20 @@ void CANBus::error(CAN_HandleTypeDef* hcan, uint16_t id) {
     TxHeader.DLC = 0;
 	TxHeader.StdId = id;
     HAL_CAN_AddTxMessage(hcan, &TxHeader, NULL, &TxMailbox);
+}
+
+void CANBus::storeCAN(uint32_t can_id, uint64_t Data){
+	can_IDs.push_back(can_id);
+    can_DATA.push_back(Data);
+}
+
+bool CANBus::getLastData(uint32_t& can_id, uint64_t& data) {
+    if (!can_IDs.empty() && !can_DATA.empty()) {
+        can_id = can_IDs.back();
+        data = can_DATA.back();
+        can_IDs.pop_back();
+        can_DATA.pop_back();
+        return true;
+    }
+    return false;
 }
