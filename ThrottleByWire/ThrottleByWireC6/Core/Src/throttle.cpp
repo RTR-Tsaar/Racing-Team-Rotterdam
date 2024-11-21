@@ -16,8 +16,6 @@ Throttle::Throttle() {
 
 // Function to initialize ADC if it's not done in main
 void Throttle::initThrottle() {
-    // ADC initialization code here if necessary
-
 
 }
 

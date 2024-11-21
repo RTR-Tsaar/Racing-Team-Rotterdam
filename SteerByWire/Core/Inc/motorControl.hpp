@@ -34,8 +34,8 @@ private:
     float integral;
     float previousError;
 
-    const uint16_t MAX_PWM = 65535; // Maximum PWM value
-    const uint16_t MIN_PWM = 0;     // Minimum PWM value
+    const int32_t MAX_OUTPUT = 65535; // Maximum PWM value
+    const int32_t MIN_OUTPUT = -MAX_OUTPUT;     // Minimum PWM value
 
     // Sets the PWM duty cycle
     void setDutyCycle(uint16_t dutyCycle);

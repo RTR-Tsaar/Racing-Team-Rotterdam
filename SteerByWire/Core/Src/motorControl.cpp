@@ -32,8 +32,8 @@ int32_t MotorControl::calculatePID(uint8_t targetAngle, uint8_t currentAngle) {
     float output = (kp * error) + (ki * integral) + (kd * derivative);
 
     // Constrain output to valid range
-    if (output > 65535) output = 65535;
-    if (output < -65535) output = -65535;
+    if (output > MAX_OUTPUT) output = MAX_OUTPUT;
+    if (output < MIN_OUTPUT) output = MIN_OUTPUT;
 
     previousError = error;
     return static_cast<int32_t>(output);
