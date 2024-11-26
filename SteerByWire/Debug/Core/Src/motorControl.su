@@ -1,5 +1,7 @@
-../Core/Src/motorControl.cpp:11:1:MotorControl::MotorControl(TIM_HandleTypeDef*, uint32_t)	24	static
-../Core/Src/motorControl.cpp:16:6:void MotorControl::start()	16	static
-../Core/Src/motorControl.cpp:21:6:void MotorControl::setDutyCycle(uint16_t)	16	static
-../Core/Src/motorControl.cpp:26:9:int32_t MotorControl::calculatePID(uint8_t, uint8_t)	40	static
-../Core/Src/motorControl.cpp:43:6:void MotorControl::steerToAngle(uint8_t, uint8_t)	24	static
+../Core/Src/motorControl.cpp:20:1:MotorControl::MotorControl(TIM_HandleTypeDef*, uint32_t)	24	static
+../Core/Src/motorControl.cpp:25:6:void MotorControl::start()	16	static
+../Core/Src/motorControl.cpp:30:6:void MotorControl::setDutyCycle(uint16_t)	16	static
+../Core/Src/motorControl.cpp:35:9:int32_t MotorControl::calculatePID(uint8_t, uint8_t)	40	static
+../Core/Src/motorControl.cpp:63:6:void MotorControl::steerToAngle(uint8_t, uint8_t)	24	static
+../Core/Src/motorControl.cpp:84:6:void MotorControl::setPIDParameters(float, float, float)	24	static
+../Core/Src/motorControl.cpp:91:6:bool MotorControl::isTargetReached(uint8_t, uint8_t)	32	static

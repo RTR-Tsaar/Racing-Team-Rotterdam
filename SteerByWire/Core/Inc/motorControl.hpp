@@ -5,43 +5,28 @@
  *      Author: rolan
  */
 
-#ifndef INC_MOTORCONTROL_HPP_
-#define INC_MOTORCONTROL_HPP_
+#ifndef INC_MOTORCONTROL_HPP
+#define INC_MOTORCONTROL_HPP
 
 #include "stm32f1xx_hal.h"
 
 class MotorControl {
 public:
-    // Constructor
     MotorControl(TIM_HandleTypeDef* timer, uint32_t channel);
-
-    // Starts PWM
     void start();
-
-    // Steers to a target angle using PID control
+    void setDutyCycle(uint16_t dutyCycle);
+    int32_t calculatePID(uint8_t targetAngle, uint8_t currentAngle);
     void steerToAngle(uint8_t currentAngle, uint8_t targetAngle);
+    void setPIDParameters(float kp_, float ki_, float kd_);
+    bool isTargetReached(uint8_t currentAngle, uint8_t targetAngle);
 
 private:
     TIM_HandleTypeDef* htim;
     uint32_t channel;
     GPIO_PinState lastDirection;
-
-    // PID parameters
-    float kp;
-    float ki;
-    float kd;
-
+    float kp, ki, kd;
     float integral;
     float previousError;
-
-    const int32_t MAX_OUTPUT = 65535; // Maximum PWM value
-    const int32_t MIN_OUTPUT = -MAX_OUTPUT;     // Minimum PWM value
-
-    // Sets the PWM duty cycle
-    void setDutyCycle(uint16_t dutyCycle);
-
-    // PID controller for calculating PWM
-    int32_t calculatePID(uint8_t targetAngle, uint8_t currentAngle);
 };
 
-#endif /* INC_MOTORCONTROL_HPP_ */
+#endif // INC_MOTORCONTROL_HPP
