@@ -12,10 +12,12 @@
 
 class Encoder{
 	private:
+		uint32_t readEncoder();
+		uint32_t encoderCompare();
+		uint8_t getCurrentAngle();
 
 	public:
 		Encoder();
-		int readEncoder();
 };
 
 

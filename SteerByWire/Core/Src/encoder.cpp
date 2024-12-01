@@ -11,7 +11,7 @@ Encoder::Encoder(){
 	//Constructor
 };
 
-int Encoder::readEncoder(){
+uint32_t Encoder::readEncoder(){
 // reads encoder data
-	return NULL;
+	return 0;
 }
