@@ -1,2 +1,4 @@
-../Core/Src/encoder.cpp:10:1:Encoder::Encoder()	1
-../Core/Src/encoder.cpp:14:10:uint32_t Encoder::readEncoder()	1
+../Core/Src/encoder.cpp:11:1:Encoder::Encoder(TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint32_t, float)	1
+../Core/Src/encoder.cpp:16:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	1
+../Core/Src/encoder.cpp:21:7:float Encoder::calculateAngle(uint32_t)	1
+../Core/Src/encoder.cpp:26:7:float Encoder::encoderCompare()	2

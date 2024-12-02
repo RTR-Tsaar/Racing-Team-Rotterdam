@@ -80,6 +80,7 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
   MotorControl motorControl(&htim2, TIM_CHANNEL_3);
+  Encoder encoder(&htim2, &htim3, 65535, 1000);
 
   /* USER CODE END 1 */
 
@@ -114,9 +115,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  int encoder1_count = __HAL_TIM_GET_COUNTER(&htim3);
-	  int encoder2_count = __HAL_TIM_GET_COUNTER(&htim2);
-	  motorControl.steerToAngle(10, 50);
+	  float currentAngle = encoder.encoderCompare();
+	  motorControl.steerToAngle(currentAngle, 50);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
