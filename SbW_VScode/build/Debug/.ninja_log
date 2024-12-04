@@ -1,0 +1,23 @@
+# ninja log v5
+67	732	7550146370838963	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c.obj	7a3e18a912ae02c1
+13	746	7550146371008982	CMakeFiles/SbW_VScode.dir/Core/Src/stm32f1xx_it.c.obj	d879dcdb8a3b8191
+61	763	7550146371259045	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c.obj	52d1e3120362ec46
+51	924	7550146372104185	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c.obj	b7b89b913615c15d
+7	930	7550146372064181	CMakeFiles/SbW_VScode.dir/Core/Src/main.c.obj	bf3bd9161c12a3eb
+34	936	7550146372194323	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c.obj	dfc1dc0134d4004b
+74	947	7550146372324383	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c.obj	c90802f36d6dc088
+29	960	7550146372369584	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c.obj	4c221f0f9d131677
+18	962	7550146372409497	CMakeFiles/SbW_VScode.dir/Core/Src/stm32f1xx_hal_msp.c.obj	c76978622c61993
+80	963	7550146372699501	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c.obj	7392d4f42a46b4d8
+40	964	7550146372799533	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c.obj	62f960c26ef5cb84
+23	965	7550146372669508	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c.obj	5ad1514b8ab7f979
+46	965	7550146373159517	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c.obj	f84b17e46a86fee7
+56	1030	7550146373964152	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c.obj	bbfc4cf37641da6
+947	1155	7550146375246076	CMakeFiles/SbW_VScode.dir/startup_stm32f103x6.s.obj	529516caba4dfc2f
+930	1328	7550146376781083	CMakeFiles/SbW_VScode.dir/Core/Src/sysmem.c.obj	662b0852960009c5
+734	1413	7550146377767334	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c.obj	f9ca882dbf2dc32e
+925	1466	7550146378247437	CMakeFiles/SbW_VScode.dir/Core/Src/system_stm32f1xx.c.obj	47c53de16f9a0143
+763	1537	7550146379043232	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c.obj	d43729e5c7c976ea
+937	1610	7550146379808421	CMakeFiles/SbW_VScode.dir/Core/Src/syscalls.c.obj	92d70f455ecb541e
+747	1712	7550146380811998	CMakeFiles/SbW_VScode.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c.obj	7a21b933ad75d4
+10	316	7550147799321790	CMakeFiles/SbW_VScode.dir/Core/Src/main.c.obj	bf3bd9161c12a3eb
