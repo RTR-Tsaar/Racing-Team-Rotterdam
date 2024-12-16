@@ -50,6 +50,9 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 uint8_t throttleLevel;
+uint64_t encoder;
+uint16_t fullLockLeft;
+uint16_t fullLockRight;
 
 /* USER CODE END PV */
 
@@ -78,7 +81,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  Throttle throttle;
+//  Throttle throttle;
 
   /* USER CODE END 1 */
 
@@ -107,6 +110,7 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start(&hadc1);
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,7 +119,7 @@ int main(void)
   {
 	  throttleLevel = throttle.readThrottle();
     /* USER CODE END WHILE */
-
+	  encoder = __HAL_TIM_GET_COUNTER(&htim2);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -346,7 +350,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 65535;
+  htim2.Init.Period = 0xFFFF;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -411,7 +415,7 @@ static void MX_TIM3_Init(void)
   htim3.Init.Period = 65535;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
   sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;

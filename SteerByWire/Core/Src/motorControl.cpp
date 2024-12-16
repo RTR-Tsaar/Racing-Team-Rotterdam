@@ -23,8 +23,12 @@ void MotorControl::setDutyCycle(uint16_t dutyCycle) {
     __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle);
 }
 
+void MotorControl::toggleDirection() {
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_9);
+}
+
 // PID controller implementation
-int32_t MotorControl::calculatePID(uint8_t targetAngle, uint8_t currentAngle) {
+int16_t MotorControl::calculatePID(uint16_t targetAngle, uint16_t currentAngle) {
     const float dt = 0.01f; // Fixed dt in seconds (10ms)
 
     // Error calculation
@@ -49,12 +53,12 @@ int32_t MotorControl::calculatePID(uint8_t targetAngle, uint8_t currentAngle) {
     // Update previous error for the next iteration
     previousError = error;
 
-    return static_cast<int32_t>(output);
+    return static_cast<int16_t>(output);
 }
 
 // Steers to target angle using PID
-void MotorControl::steerToAngle(uint8_t currentAngle, uint8_t targetAngle) {
-    int32_t pidOutput = calculatePID(targetAngle, currentAngle);
+void MotorControl::steerToAngle(uint16_t currentAngle, uint16_t targetAngle) {
+    int16_t pidOutput = calculatePID(targetAngle, currentAngle);
 
     // Apply dead zone
     if (std::abs(pidOutput) < DEAD_ZONE_THRESHOLD) {
@@ -73,6 +77,6 @@ void MotorControl::steerToAngle(uint8_t currentAngle, uint8_t targetAngle) {
 }
 
 // Check if target angle is reached
-bool MotorControl::isTargetReached(uint8_t currentAngle, uint8_t targetAngle) {
+bool MotorControl::isTargetReached(uint16_t currentAngle, uint16_t targetAngle) {
     return std::abs(static_cast<float>(targetAngle - currentAngle)) < ACCEPTABLE_ERROR_MARGIN;
 }

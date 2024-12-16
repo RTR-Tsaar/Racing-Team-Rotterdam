@@ -15,8 +15,9 @@ public:
     MotorControl(TIM_HandleTypeDef* timer, uint32_t channel);
     void start();
     void setDutyCycle(uint16_t dutyCycle);
-    void steerToAngle(uint8_t currentAngle, uint8_t targetAngle);
-    bool isTargetReached(uint8_t currentAngle, uint8_t targetAngle);
+    void toggleDirection();
+    void steerToAngle(uint16_t currentAngle, uint16_t targetAngle);
+    bool isTargetReached(uint16_t currentAngle, uint16_t targetAngle);
 
 private:
     TIM_HandleTypeDef* htim;
@@ -25,7 +26,7 @@ private:
     float integral;
     float previousError;
 
-    int32_t calculatePID(uint8_t targetAngle, uint8_t currentAngle);
+    int16_t calculatePID(uint16_t targetAngle, uint16_t currentAngle);
 
 
     // Fixed PID constants

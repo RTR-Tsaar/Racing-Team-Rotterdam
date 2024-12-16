@@ -22,7 +22,6 @@ class Encoder{
 	public:
 		Encoder(TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint32_t maxCount, float countsPerRevolution);
 		float encoderCompare();
-
 };
 
 

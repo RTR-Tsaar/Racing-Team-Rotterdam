@@ -6,6 +6,7 @@
  */
  
 #include "encoder.hpp"
+#include "motorControl.hpp"
 #include "cmath"
 
 Encoder::Encoder(TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint32_t maxCount, float countsPerRevolution)
@@ -28,7 +29,7 @@ float Encoder::encoderCompare() {
     uint32_t encoder2_count = readEncoder(encoder2);
     int32_t deficit = static_cast<int32_t>(encoder1_count) - static_cast<int32_t>(encoder2_count);
 
-    if (abs(deficit) > 5) {
+    if (abs(deficit) > 1) {
         // Return NaN or an error flag if counts are inconsistent
         return -1.0f;
     }

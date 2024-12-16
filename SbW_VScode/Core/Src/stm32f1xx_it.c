@@ -84,6 +84,14 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
+    // Read the Hard Fault Status Register (HFSR)
+    uint32_t hfsr = SCB->HFSR;
+    // Read the Configurable Fault Status Register (CFSR)
+    uint32_t cfsr = SCB->CFSR;
+    // Read the Bus Fault Address Register (BFAR)
+    uint32_t bfar = SCB->BFAR;
+    // Read the Memory Management Fault Address Register (MMFAR)
+    uint32_t mmfar = SCB->MMFAR;
 
   /* USER CODE END HardFault_IRQn 0 */
   while (1)

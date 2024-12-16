@@ -51,7 +51,23 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
+CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
+uint8_t RxData[8];
+uint32_t can_id;
 
+typedef struct {
+    uint8_t error_warning_flag;
+    uint8_t error_passive_flag;
+    uint8_t bus_off_flag;
+    uint8_t stuff_error;
+    uint8_t form_error;
+    uint8_t acknowledgment_error;
+    uint8_t bit_recessive_error;
+    uint8_t bit_dominant_error;
+    uint8_t crc_error;
+} CAN_ErrorFlags;
+
+int counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,7 +84,58 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
+	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
+
+
+}
+
+void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
+    uint32_t error = HAL_CAN_GetError(hcan);
+
+    // Reset all error flags
+    error_flags->error_warning_flag = 0;
+    error_flags->error_passive_flag = 0;
+    error_flags->bus_off_flag = 0;
+    error_flags->stuff_error = 0;
+    error_flags->form_error = 0;
+    error_flags->acknowledgment_error = 0;
+    error_flags->bit_recessive_error = 0;
+    error_flags->bit_dominant_error = 0;
+    error_flags->crc_error = 0;
+
+    if (error != HAL_CAN_ERROR_NONE) {
+        if (error & HAL_CAN_ERROR_EWG) {
+            error_flags->error_warning_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_EPV) {
+            error_flags->error_passive_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_BOF) {
+            error_flags->bus_off_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_STF) {
+            error_flags->stuff_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_FOR) {
+            error_flags->form_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_ACK) {
+            error_flags->acknowledgment_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_BR) {
+            error_flags->bit_recessive_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_BD) {
+            error_flags->bit_dominant_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_CRC) {
+            error_flags->crc_error = 1;
+        }
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -79,9 +146,11 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  MotorControl motorControl(&htim2, TIM_CHANNEL_3);
-  Encoder encoder(&htim2, &htim3, 65535, 1000);
+	CANBus canBus;
+	CAN_ErrorFlags error_flags;
 
+	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
+	Encoder encoder(&htim2, &htim3, 65535, 1000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -108,7 +177,29 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  //Initializes the steering motor
   motorControl.start();
+  //Initializes the CAN-Bus communication
+  canBus.start(&hcan, CAN_ID_STD);
+
+/* The following code is used to calibrate the encoders
+ * We do this to make sure all angle measurements are accurate
+ */
+
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+  motorControl.setDutyCycle(2000);
+  //measure current on steering motor lines here
+  // if current is high make if statement true
+  if (false) {
+	  //measure encoders
+	  motorControl.setDutyCycle(0);
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+	  motorControl.setDutyCycle(2000);
+  }
+  if (false) {
+  	  //measure encoders
+  	  motorControl.setDutyCycle(0);
+    }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -356,7 +447,7 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
   sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
