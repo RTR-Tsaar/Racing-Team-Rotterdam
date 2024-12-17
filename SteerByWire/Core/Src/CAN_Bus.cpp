@@ -42,7 +42,12 @@ void CANBus::transmit(CAN_HandleTypeDef* hcan, uint8_t* TxData, uint16_t id) {
     	TxHeader.ExtId = id;
     }
 	TxHeader.DLC = 8;
-    HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
+//    HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
+    if (HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox) != HAL_OK) {
+        // Transmission failed
+        Error_Handler();
+    }
+
 }
 
 void CANBus::configureFilter(CAN_HandleTypeDef* hcan, uint16_t ID, uint16_t Mask, uint8_t filterBank, uint8_t slaveFilterBank){

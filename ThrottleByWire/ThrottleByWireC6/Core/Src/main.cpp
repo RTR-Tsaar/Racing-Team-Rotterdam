@@ -81,7 +81,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-//  Throttle throttle;
+  Throttle throttle;
 
   /* USER CODE END 1 */
 
