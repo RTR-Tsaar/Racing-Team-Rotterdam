@@ -17,7 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.hpp"
+#include <main.hpp>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,10 +51,9 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-CAN_RxHeaderTypeDef rxHeader;  // CAN transmit header
-uint8_t rxData[8];
+CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
+uint8_t RxData[8];
 uint32_t can_id;
-uint8_t data[8];
 
 typedef struct {
     uint8_t error_warning_flag;
@@ -68,7 +67,6 @@ typedef struct {
     uint8_t crc_error;
 } CAN_ErrorFlags;
 
-int counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -85,23 +83,10 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan, CANBus *canBus){
-//	if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, rxData) == HAL_OK) {
-//		uint64_t receivedData = 0;
-//		for (int i = 0; i < rxHeader.DLC; i++) {
-//			receivedData |= ((uint64_t)rxData[i]) << (i * 8);
-//		}
-//		canBus->storeCAN(rxHeader.StdId, receivedData);
-//	}
-//
-//}
-
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
-	if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, rxData) == HAL_OK) {
-	    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-	} else {
-	    // Error handling, e.g., reset CAN or log error
-	}
+	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
+	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
 }
 
 
@@ -191,36 +176,13 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-  uint8_t obamna[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
+  uint8_t trump[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
 
   //Initializes the steering motor
   motorControl.start();
   //Initializes the CAN-Bus communication
   canBus.start(&hcan, CAN_ID_STD);
-  HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
 
-
-  canBus.configureFilter(&hcan, 0x000, 0x000, 10, 0); // Accept all messages
-
-
-///* The following code is used to calibrate the encoders
-// * We do this to make sure all angle measurements are accurate
-// */
-//
-//  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
-//  motorControl.setDutyCycle(2000);
-//  //measure current on steering motor lines here
-//  // if current is high make if statement true
-//  if (false) {
-//	  //measure encoders
-//	  motorControl.setDutyCycle(0);
-//	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-//	  motorControl.setDutyCycle(2000);
-//  }
-//  if (false) {
-//  	  //measure encoders
-//  	  motorControl.setDutyCycle(0);
-//    }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -229,9 +191,9 @@ int main(void)
   {
 //	  float currentAngle = encoder.encoderCompare();
 //	  motorControl.steerToAngle(currentAngle, 50);
-	  canBus.transmit(&hcan, obamna, 446);
-	  HAL_Delay(500);
-	  check_CAN_errors(&hcan, &error_flags);
+	  canBus.transmit(&hcan, trump, 446);
+	  HAL_Delay(300);
+//	  check_CAN_errors(&hcan, &error_flags);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -348,10 +310,10 @@ static void MX_CAN_Init(void)
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 16;
+  hcan.Init.Prescaler = 36;
   hcan.Init.Mode = CAN_MODE_LOOPBACK;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
@@ -364,7 +326,9 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
+  CANBus canBus;
 
+  canBus.configureFilter(&hcan, 0b00100010000, 0b00110110000, 10, 0);
   /* USER CODE END CAN_Init 2 */
 
 }
@@ -572,7 +536,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
@@ -583,8 +547,8 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB15 */
@@ -616,8 +580,6 @@ static void MX_GPIO_Init(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)

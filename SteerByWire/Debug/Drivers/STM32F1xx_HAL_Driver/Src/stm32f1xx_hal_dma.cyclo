@@ -1,7 +1,7 @@
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:142:19:HAL_DMA_Init	2
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:219:19:HAL_DMA_DeInit	2
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:318:19:HAL_DMA_Start	3
-../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:361:19:HAL_DMA_Start_IT	4
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:142:19:HAL_DMA_Init	28
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:219:19:HAL_DMA_DeInit	9
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:318:19:HAL_DMA_Start	5
+../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:361:19:HAL_DMA_Start_IT	6
 ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:415:19:HAL_DMA_Abort	2
 ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:456:19:HAL_DMA_Abort_IT	9
 ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c:501:19:HAL_DMA_PollForTransfer	40

@@ -84,8 +84,8 @@ all: main-build
 main-build: CAN_Bus_test.elf secondary-outputs
 
 # Tool invocations
-CAN_Bus_test.elf CAN_Bus_test.map: $(OBJS) $(USER_OBJS) C:\Users\denbo\Documents\RTR\ minor\CODE\Racing-Team-Rotterdam\CAN_bus_algemeen\CAN_Bus_test\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "CAN_Bus_test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\denbo\Documents\RTR minor\CODE\Racing-Team-Rotterdam\CAN_bus_algemeen\CAN_Bus_test\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN_Bus_test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+CAN_Bus_test.elf CAN_Bus_test.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\CAN_bus_algemeen\CAN_Bus_test\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "CAN_Bus_test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\CAN_bus_algemeen\CAN_Bus_test\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN_Bus_test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

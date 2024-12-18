@@ -170,11 +170,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
 	canBus.transmit(&hcan, trump, 446);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
-	HAL_Delay(1000);
+	HAL_Delay(300);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
