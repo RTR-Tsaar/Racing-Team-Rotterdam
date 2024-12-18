@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include <main.hpp>
 #include "CAN_Bus.hpp"
+#include "encoder.hpp"
+#include "motorControl.hpp"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -134,6 +136,8 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	CANBus canBus;
 	CAN_ErrorFlags error_flags;
+	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
+	Encoder encoder(&htim2, &htim2, 65535, 1000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
