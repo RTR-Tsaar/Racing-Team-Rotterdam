@@ -16,7 +16,6 @@ class Encoder{
 		TIM_HandleTypeDef* encoder2;
 		uint32_t maxEncoderCount;
 		float countsPerRev;
-		uint32_t readEncoder(TIM_HandleTypeDef* enc);
 		float calculateAngle(uint32_t count);
 
 	public:

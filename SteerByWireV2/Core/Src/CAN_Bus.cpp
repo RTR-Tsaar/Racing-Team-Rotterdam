@@ -3,6 +3,7 @@
  *
  *  Created on: Nov 4, 2024
  *      Author: Dennis Boekholtz
+ *      Author: Rolan van Bommel
  */
 
 #include "CAN_bus.hpp"
@@ -73,6 +74,15 @@ void CANBus::storeCAN(uint32_t can_id, uint64_t Data){
 	can_IDs.push_back(can_id);
     can_DATA.push_back(Data);
 }
+
+void CANBus::dataSplitter(uint32_t data, uint8_t* bytes) {
+    // Split the 32-bit integer into 4 bytes
+    bytes[0] = (data >> 24) & 0xFF; // Most significant byte
+    bytes[1] = (data >> 16) & 0xFF;
+    bytes[2] = (data >> 8) & 0xFF;
+    bytes[3] = data & 0xFF;         // Least significant byte
+}
+
 
 bool CANBus::getLastData(uint32_t& can_id, uint64_t& data) {
     if (!can_IDs.empty() && !can_DATA.empty()) {

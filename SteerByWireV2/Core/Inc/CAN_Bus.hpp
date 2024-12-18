@@ -24,6 +24,8 @@ public:
     void configureFilter(CAN_HandleTypeDef* hcan, uint16_t ID, uint16_t Mask, uint8_t filterBank, uint8_t slaveFilterBank);  // Configure CAN filters
     void error(CAN_HandleTypeDef* hcan, uint16_t id);  // Transmit data
 
+    void dataSplitter(uint32_t data, uint8_t* bytes);
+
     void storeCAN(uint32_t can_id, uint64_t can_DATA);
     bool getLastData(uint32_t& can_id, uint64_t& data);
 private:

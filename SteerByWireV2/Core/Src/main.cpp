@@ -23,7 +23,6 @@
 #include "motorControl.hpp"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+CANBus globalcanbus;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -134,7 +133,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	CANBus canBus;
 	CAN_ErrorFlags error_flags;
 	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
 	Encoder encoder(&htim2, &htim2, 65535, 1000);
@@ -161,9 +159,12 @@ int main(void)
   MX_CAN_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   uint8_t trump[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
+  uint8_t canAngle[8];
 
-  canBus.start(&hcan, CAN_ID_STD);
+  globalcanbus.start(&hcan, CAN_ID_STD);
+  motorControl.start();
   //  canBus.error(&hcan, 2047);
   //  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */
@@ -172,9 +173,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  /* USER CODE END WHILE */
-	  canBus.transmit(&hcan, trump, 446);
+	  uint32_t currentAngle = encoder.readEncoder(&htim2);
+	  motorControl.steerToAngle(currentAngle, 50);
+
+	  globalcanbus.dataSplitter(currentAngle, canAngle);
+
+	  globalcanbus.transmit(&hcan, canAngle, 446);
+	  int length = sizeof(canAngle)/sizeof(canAngle[0]);
+
 	  HAL_Delay(300);
+	  /* USER CODE END WHILE */
+
 	  /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -251,9 +260,8 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-  CANBus canBus;
 
-  canBus.configureFilter(&hcan, 0b00100010000, 0b00110110000, 10, 0);
+  globalcanbus.configureFilter(&hcan, 0b00100010000, 0b00110110000, 10, 0);
   /* USER CODE END CAN_Init 2 */
 
 }

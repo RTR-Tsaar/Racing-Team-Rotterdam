@@ -16,11 +16,11 @@ class Encoder{
 		TIM_HandleTypeDef* encoder2;
 		uint32_t maxEncoderCount;
 		float countsPerRev;
-		uint32_t readEncoder(TIM_HandleTypeDef* enc);
-		float calculateAngle(uint32_t count);
 
 	public:
 		Encoder(TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint32_t maxCount, float countsPerRevolution);
+		uint32_t readEncoder(TIM_HandleTypeDef* enc);
+		float calculateAngle(uint32_t count);
 		float encoderCompare();
 };
 
