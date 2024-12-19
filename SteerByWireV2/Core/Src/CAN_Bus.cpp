@@ -83,7 +83,6 @@ void CANBus::dataSplitter(uint32_t data, uint8_t* bytes) {
     bytes[3] = data & 0xFF;         // Least significant byte
 }
 
-
 bool CANBus::getLastData(uint32_t& can_id, uint64_t& data) {
     if (!can_IDs.empty() && !can_DATA.empty()) {
         can_id = can_IDs.back();

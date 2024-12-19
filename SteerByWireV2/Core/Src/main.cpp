@@ -74,10 +74,23 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+uint32_t extract_uint32_from_rxdata(uint8_t *data) {
+    uint32_t extracted_value = 0;
+    extracted_value |= (uint32_t)data[0] << 24; // Most significant byte
+    extracted_value |= (uint32_t)data[1] << 16;
+    extracted_value |= (uint32_t)data[2] << 8;
+    extracted_value |= (uint32_t)data[3];      // Least significant byte
+    return extracted_value;
+}
+
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
+    uint32_t received_value = extract_uint32_from_rxdata(RxData);
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 }
+
+
 
 void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
     uint32_t error = HAL_CAN_GetError(hcan);
@@ -160,8 +173,8 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-  uint8_t trump[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
   uint8_t canAngle[8];
+  uint32_t number = 1424987;
 
   globalcanbus.start(&hcan, CAN_ID_STD);
   motorControl.start();
@@ -176,11 +189,13 @@ int main(void)
 	  uint32_t currentAngle = encoder.readEncoder(&htim2);
 	  motorControl.steerToAngle(currentAngle, 50);
 
-	  globalcanbus.dataSplitter(currentAngle, canAngle);
+	  globalcanbus.dataSplitter(number, canAngle);
 
 	  globalcanbus.transmit(&hcan, canAngle, 446);
-	  int length = sizeof(canAngle)/sizeof(canAngle[0]);
 
+	  number = number + 10;
+
+//	  int length = sizeof(canAngle)/sizeof(canAngle[0]);
 	  HAL_Delay(300);
 	  /* USER CODE END WHILE */
 
