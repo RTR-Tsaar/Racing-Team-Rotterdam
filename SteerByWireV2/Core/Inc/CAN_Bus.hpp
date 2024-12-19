@@ -25,6 +25,7 @@ public:
     void error(CAN_HandleTypeDef* hcan, uint16_t id);  // Transmit data
 
     void dataSplitter(uint32_t data, uint8_t* bytes);
+    uint32_t dataMerger(uint8_t *data);
 
     void storeCAN(uint32_t can_id, uint64_t can_DATA);
     bool getLastData(uint32_t& can_id, uint64_t& data);
