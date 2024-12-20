@@ -89,8 +89,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 		received_value2 = globalcanbus.dataMerger(RxData);
 	}
 	else{
-		received_value = -1;
-		received_value2 = -1;
+		Error_Handler();
 	}
 
 }
@@ -153,7 +152,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	CAN_ErrorFlags error_flags;
 	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
-	Encoder encoder(&htim2, &htim2, 65535, 1000);
+	Encoder encoder(&motorControl, &htim2, &htim2, 65535, 1000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/

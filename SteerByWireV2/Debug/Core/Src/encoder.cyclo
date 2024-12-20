@@ -1,4 +1,6 @@
-../Core/Src/encoder.cpp:12:1:Encoder::Encoder(TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint32_t, float)	1
-../Core/Src/encoder.cpp:17:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	1
-../Core/Src/encoder.cpp:22:7:float Encoder::calculateAngle(uint32_t)	1
-../Core/Src/encoder.cpp:27:7:float Encoder::encoderCompare()	2
+../Core/Src/encoder.cpp:11:1:Encoder::Encoder(MotorControl*, TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint32_t, float)	1
+../Core/Src/encoder.cpp:16:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	1
+../Core/Src/encoder.cpp:21:6:void Encoder::resetEncoderCount(TIM_HandleTypeDef*)	1
+../Core/Src/encoder.cpp:25:6:void Encoder::calibrateEncoder(TIM_HandleTypeDef*, uint16_t)	3
+../Core/Src/encoder.cpp:43:7:float Encoder::calculateAngle(uint32_t)	1
+../Core/Src/encoder.cpp:48:7:float Encoder::encoderCompare()	2
