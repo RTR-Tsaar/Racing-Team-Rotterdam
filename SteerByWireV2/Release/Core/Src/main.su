@@ -1,0 +1,7 @@
+../Core/Src/main.cpp:83:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	8	static,ignoring_inline_asm
+../Core/Src/main.cpp:99:6:void check_CAN_errors(CAN_HandleTypeDef*, CAN_ErrorFlags*)	8	static
+../Core/Src/main.cpp:227:6:void SystemClock_Config()	88	static,ignoring_inline_asm
+../Core/Src/main.cpp:149:5:int main()	176	static,ignoring_inline_asm
+../Core/Src/main.cpp:466:6:void Error_Handler()	0	static,ignoring_inline_asm
+../Core/Src/main.cpp:475:1:cpp)	0	static
+../Core/Src/main.cpp:475:1:cpp)	8	static
