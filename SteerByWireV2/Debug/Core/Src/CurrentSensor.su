@@ -1,0 +1,2 @@
+../Core/Src/CurrentSensor.cpp:11:1:CurrentSensor::CurrentSensor(ADC_HandleTypeDef*, float, float, float)	24	static
+../Core/Src/CurrentSensor.cpp:14:7:float CurrentSensor::getCurrent()	40	static

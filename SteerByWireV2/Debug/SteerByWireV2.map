@@ -58,8 +58,16 @@ C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.external
                               C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc_nano.a(libc_a-malloc.o) (_free_r)
 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc_nano.a(libc_a-fflush.o)
                               C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc_nano.a(libc_a-findfp.o) (_fflush_r)
+C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
+                              ./Core/Src/CurrentSensor.o (__aeabi_dmul)
 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
                               ./Core/Src/motorControl.o (__aeabi_fmul)
+C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+                              ./Core/Src/CurrentSensor.o (__aeabi_dsub)
+C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+                              ./Core/Src/CurrentSensor.o (__aeabi_ddiv)
+C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
+                              ./Core/Src/CurrentSensor.o (__aeabi_d2f)
 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubsf3.o)
                               ./Core/Src/motorControl.o (__aeabi_fsub)
 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivsf3.o)
@@ -528,6 +536,104 @@ Discarded input sections
                 0x00000000       0x3a ./Core/Src/CAN_Bus.o
  .text._ZNSt11__copy_moveILb1ELb1ESt26random_access_iterator_tagE8__copy_mIyEEPT_PKS3_S6_S4_
                 0x00000000       0x3a ./Core/Src/CAN_Bus.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .group         0x00000000        0xc ./Core/Src/CurrentSensor.o
+ .text          0x00000000        0x0 ./Core/Src/CurrentSensor.o
+ .data          0x00000000        0x0 ./Core/Src/CurrentSensor.o
+ .bss           0x00000000        0x0 ./Core/Src/CurrentSensor.o
+ .text._ZN13CurrentSensorC2EP19__ADC_HandleTypeDeffff
+                0x00000000       0x32 ./Core/Src/CurrentSensor.o
+ .text._ZN13CurrentSensor10getCurrentEv
+                0x00000000       0xac ./Core/Src/CurrentSensor.o
+ .debug_info    0x00000000      0x6f0 ./Core/Src/CurrentSensor.o
+ .debug_abbrev  0x00000000      0x224 ./Core/Src/CurrentSensor.o
+ .debug_aranges
+                0x00000000       0x28 ./Core/Src/CurrentSensor.o
+ .debug_rnglists
+                0x00000000       0x1a ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1c4 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0xb80 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x221 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x2e ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x51 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x103 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x6a ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1df ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0xbd ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0xd23 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000     0xde75 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x6d ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000     0x34a2 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x190 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x5c ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x5bc ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1b7 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1cb ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x114 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1b2 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x27 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x12f ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1bc ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x3c ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x408 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x57 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x46a ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x1b5 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x87 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x183 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x140 ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000      0x8ed ./Core/Src/CurrentSensor.o
+ .debug_macro   0x00000000       0x69 ./Core/Src/CurrentSensor.o
+ .debug_line    0x00000000      0x775 ./Core/Src/CurrentSensor.o
+ .debug_str     0x00000000    0x86c13 ./Core/Src/CurrentSensor.o
+ .comment       0x00000000       0x44 ./Core/Src/CurrentSensor.o
+ .debug_frame   0x00000000       0x64 ./Core/Src/CurrentSensor.o
+ .ARM.attributes
+                0x00000000       0x2d ./Core/Src/CurrentSensor.o
  .group         0x00000000        0x8 ./Core/Src/encoder.o
  .group         0x00000000        0xc ./Core/Src/encoder.o
  .group         0x00000000        0xc ./Core/Src/encoder.o
@@ -3725,12 +3831,36 @@ Discarded input sections
  .debug_frame   0x00000000       0x5c C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc_nano.a(libc_a-fflush.o)
  .ARM.attributes
                 0x00000000       0x2d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc_nano.a(libc_a-fflush.o)
+ .text          0x00000000      0x254 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
+ .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
+ .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
+ .debug_frame   0x00000000       0x30 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
+ .ARM.attributes
+                0x00000000       0x1d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldf3.o)
  .text          0x00000000      0x168 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
  .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
  .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
  .debug_frame   0x00000000       0x24 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
  .ARM.attributes
                 0x00000000       0x1d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_mulsf3.o)
+ .text          0x00000000      0x378 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+ .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x00000000       0xac C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000000       0x1d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubdf3.o)
+ .text          0x00000000      0x424 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+ .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000000       0x50 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000000       0x1d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivdf3.o)
+ .text          0x00000000       0xa0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .debug_frame   0x00000000       0x24 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x00000000       0x1d C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_truncdfsf2.o)
  .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubsf3.o)
  .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubsf3.o)
  .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp\libgcc.a(_arm_muldivsf3.o)
@@ -3763,6 +3893,7 @@ LOAD C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
 LOAD C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 LOAD ./Core/Src/CAN_Bus.o
+LOAD ./Core/Src/CurrentSensor.o
 LOAD ./Core/Src/encoder.o
 LOAD ./Core/Src/main.o
 LOAD ./Core/Src/motorControl.o
