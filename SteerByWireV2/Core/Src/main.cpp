@@ -177,13 +177,17 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+
+  //Temporary variables for development and testing ------------------------------*/
   uint8_t canAngle[8];
   uint32_t counter = 978324;
   uint8_t desiredAngle[8];
   uint32_t counter2 = 9999999;
-
+  //---------------------------------------------------------------------------*/
   globalcanbus.start(&hcan, CAN_ID_STD);
   motorControl.start();
+
+  encoder.calibrateEncoder(&htim2, 10);
   //  canBus.error(&hcan, 2047);
   //  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */
@@ -192,7 +196,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint32_t currentAngle = encoder.readEncoder(&htim2);
+
+	  /*
+	   * Fix this shit
+	   * Its fucking ugly and poorly written.
+	   */
+	  uint16_t currentCount = encoder.readEncoder(&htim2);
+	  int16_t currentAngle = encoder.calculateAngle(currentCount);
 	  motorControl.steerToAngle(currentAngle, 50);
 
 	  globalcanbus.dataSplitter(counter, canAngle);

@@ -35,7 +35,7 @@ private:
     static constexpr float KD = 0.01f; // Derivative gain
 
     // Other constants
-    static constexpr float MAX_OUTPUT = 1000.0f;
+    static constexpr float MAX_OUTPUT = 65535.0f;
     static constexpr float MIN_OUTPUT = 0.0f;
     static constexpr float MAX_INTEGRAL = 500.0f;
     static constexpr float MIN_INTEGRAL = -500.0f;
