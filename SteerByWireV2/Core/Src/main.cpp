@@ -21,6 +21,7 @@
 #include "CAN_Bus.hpp"
 #include "encoder.hpp"
 #include "motorControl.hpp"
+#include "CurrentSensor.hpp"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -149,7 +150,13 @@ void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
 int main(void)
 {
 
+
   /* USER CODE BEGIN 1 */
+	float offset = 1.65f; // Voltage at 0 Amps
+	float vRef = 3.3f; // Voltage of microcontroller
+	float sensitivity = 0.185f;// mV between Amps
+
+	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
 	CAN_ErrorFlags error_flags;
 	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
 	Encoder encoder(&motorControl, &htim2, &htim2, 65535, 1000);
@@ -178,6 +185,7 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+  HAL_ADC_Start(&hadc1);
 
   //Temporary variables for development and testing ------------------------------*/
   uint8_t canAngle[8];
@@ -188,7 +196,8 @@ int main(void)
   globalcanbus.start(&hcan, CAN_ID_STD);
   motorControl.start();
 
-  encoder.calibrateEncoder(&htim2, 10);
+  float motorCurrent = currentSensor.getCurrent();
+  encoder.calibrateEncoder(&htim2, motorCurrent, 1.0f);
   //  canBus.error(&hcan, 2047);
   //  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */
@@ -202,6 +211,7 @@ int main(void)
 	   * Fix this shit
 	   * Its fucking ugly and poorly written.
 	   */
+
 	  uint16_t currentCount = encoder.readEncoder(&htim2);
 	  int16_t currentAngle = encoder.calculateAngle(currentCount);
 	  motorControl.steerToAngle(currentAngle, 50);

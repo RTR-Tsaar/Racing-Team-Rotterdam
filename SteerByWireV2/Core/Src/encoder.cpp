@@ -22,11 +22,10 @@ void Encoder::resetEncoderCount(TIM_HandleTypeDef* enc){
 	__HAL_TIM_SET_COUNTER(enc, 0);
 }
 
-void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, uint16_t motorCurrent){
+void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float motorCurrent, float stallCurrent){
 
 
 	bool stalling = false; //Checks if the steering motor is stalled. We need this to know when the steering system has reached full lock
-	uint16_t stallCurrent = 500; //mA
 
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 

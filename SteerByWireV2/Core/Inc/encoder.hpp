@@ -23,7 +23,7 @@ class Encoder{
 		Encoder(MotorControl* motorControl, TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint16_t maxCount, float countsPerRevolution);
 		uint32_t readEncoder(TIM_HandleTypeDef* enc);
 		void resetEncoderCount(TIM_HandleTypeDef* enc);
-		void calibrateEncoder(TIM_HandleTypeDef* enc, uint16_t motorCurrent);
+		void calibrateEncoder(TIM_HandleTypeDef* enc, float motorCurrent, float stallCurrent);
 		int16_t calculateAngle(uint16_t count);
 		int16_t encoderCompare();
 };
