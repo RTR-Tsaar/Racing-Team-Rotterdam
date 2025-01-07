@@ -49,6 +49,8 @@ CAN_HandleTypeDef hcan;
 
 TIM_HandleTypeDef htim2;
 
+float motorCurrent;
+
 /* USER CODE BEGIN PV */
 CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
 uint8_t RxData[8];
@@ -156,7 +158,7 @@ int main(void)
 	float vRef = 3.3f; // Voltage of microcontroller
 	float sensitivity = 0.185f;// mV between Amps
 
-	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
+//	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
 	CAN_ErrorFlags error_flags;
 	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
 	Encoder encoder(&motorControl, &htim2, &htim2, 65535, 1000);
@@ -196,8 +198,8 @@ int main(void)
   globalcanbus.start(&hcan, CAN_ID_STD);
   motorControl.start();
 
-  float motorCurrent = currentSensor.getCurrent();
-  encoder.calibrateEncoder(&htim2, motorCurrent, 1.0f);
+//  motorCurrent = currentSensor.getCurrent();
+  encoder.calibrateEncoder(&htim2, 1.0f);
   //  canBus.error(&hcan, 2047);
   //  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */

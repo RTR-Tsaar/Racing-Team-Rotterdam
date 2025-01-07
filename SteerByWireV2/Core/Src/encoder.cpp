@@ -6,7 +6,10 @@
  */
  
 #include "encoder.hpp"
+#include "CurrentSensor.hpp"
 #include "cmath"
+extern ADC_HandleTypeDef &hadc1;
+
 
 Encoder::Encoder(MotorControl* motorControl, TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint16_t maxCount, float countsPerRevolution)
     : motorControl(motorControl), encoder1(enc1), encoder2(enc2), maxEncoderCount(maxCount), countsPerRev(countsPerRevolution) {
@@ -22,8 +25,14 @@ void Encoder::resetEncoderCount(TIM_HandleTypeDef* enc){
 	__HAL_TIM_SET_COUNTER(enc, 0);
 }
 
-void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float motorCurrent, float stallCurrent){
+void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
+	float offset = 1.65f; // Voltage at 0 Amps
+	float vRef = 3.3f; // Voltage of microcontroller
+	float sensitivity = 0.185f;// mV between Amps
 
+	CurrentSensor currentSensor(&hadc1,vRef, sensitivity, offset);
+
+	float motorCurrent = currentSensor.getCurrent();
 
 	bool stalling = false; //Checks if the steering motor is stalled. We need this to know when the steering system has reached full lock
 
