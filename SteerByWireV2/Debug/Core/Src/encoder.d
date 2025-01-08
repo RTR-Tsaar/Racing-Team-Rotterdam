@@ -26,8 +26,7 @@ Core/Src/encoder.o: ../Core/Src/encoder.cpp ../Core/Inc/encoder.hpp \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Core/Inc/motorControl.hpp ../Core/Inc/CurrentSensor.hpp \
- ../Core/Inc/CurrentSensor.hpp
+ ../Core/Inc/motorControl.hpp ../Core/Inc/CurrentSensor.hpp
 ../Core/Inc/encoder.hpp:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -57,5 +56,4 @@ Core/Src/encoder.o: ../Core/Src/encoder.cpp ../Core/Inc/encoder.hpp \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Core/Inc/motorControl.hpp:
-../Core/Inc/CurrentSensor.hpp:
 ../Core/Inc/CurrentSensor.hpp:

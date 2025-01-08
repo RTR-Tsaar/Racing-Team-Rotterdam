@@ -15,13 +15,14 @@
 class Encoder{
 	private:
 		MotorControl* motorControl;
+		CurrentSensor* currentSensor;
 		TIM_HandleTypeDef* encoder1;
 		TIM_HandleTypeDef* encoder2;
 		uint16_t maxEncoderCount;
 		float countsPerRev;
 
 	public:
-		Encoder(MotorControl* motorControl, TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint16_t maxCount, float countsPerRevolution);
+		Encoder(MotorControl* motorControl,CurrentSensor* currentSensor, TIM_HandleTypeDef* enc1, TIM_HandleTypeDef* enc2, uint16_t maxCount, float countsPerRevolution);
 		uint32_t readEncoder(TIM_HandleTypeDef* enc);
 		void resetEncoderCount(TIM_HandleTypeDef* enc);
 		void calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent);

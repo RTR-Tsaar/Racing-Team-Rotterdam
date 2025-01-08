@@ -158,10 +158,10 @@ int main(void)
 	float vRef = 3.3f; // Voltage of microcontroller
 	float sensitivity = 0.185f;// mV between Amps
 
-//	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
+	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
 	CAN_ErrorFlags error_flags;
 	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
-	Encoder encoder(&motorControl, &htim2, &htim2, 65535, 1000);
+	Encoder encoder(&motorControl, &currentSensor, &htim2, &htim2, 65535, 1000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
