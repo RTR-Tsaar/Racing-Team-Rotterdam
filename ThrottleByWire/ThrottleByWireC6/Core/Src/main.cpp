@@ -20,7 +20,6 @@
 #include <main.hpp>
 #include "throttle.hpp"
 /* USER CODE END Includes */
-#include "CurrentSensor.hpp"
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -47,13 +46,7 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 uint8_t throttleLevel;
-uint64_t encoder;
-uint16_t fullLockLeft;
-uint16_t fullLockRight;
-float currentStrength;
-float voltage;
-float adcValue;
-bool stalling;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -83,10 +76,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	  Throttle throttle;
 
-	  float offset = 1.65f; // Voltage at 0 Amps
-	  float vRef = 3.3f; // Voltage of microcontroller
-	  float sensitivity = 0.185f;// mV between Amps
-	  CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -115,23 +104,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start(&hadc1);
 
-//  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   /* USER CODE END 2 */
 
 
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	currentStrength = currentSensor.getCurrent();
 
-
-	if (currentStrength > 1.0f){
-		stalling = true;
-	} else if (currentStrength < 1.0f){
-		stalling = false;
-	}
-//	  throttleLevel = throttle.readThrottle();
-//	  encoder = __HAL_TIM_GET_COUNTER(&htim2);
+	  throttleLevel = throttle.readThrottle();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
