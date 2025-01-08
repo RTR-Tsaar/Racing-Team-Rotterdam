@@ -2,6 +2,6 @@ C:\ST\STM32CubeIDE_1.16.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/encoder.cpp:12:1:Encoder::Encoder(MotorControl*, CurrentSensor*, TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint16_t, float)	24	static
 ../Core/Src/encoder.cpp:17:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	16	static
 ../Core/Src/encoder.cpp:22:6:void Encoder::resetEncoderCount(TIM_HandleTypeDef*)	16	static
-../Core/Src/encoder.cpp:26:6:void Encoder::calibrateEncoder(TIM_HandleTypeDef*, float)	32	static
-../Core/Src/encoder.cpp:58:9:int16_t Encoder::calculateAngle(uint16_t)	24	static
-../Core/Src/encoder.cpp:68:9:int16_t Encoder::encoderCompare()	32	static
+../Core/Src/encoder.cpp:26:6:void Encoder::calibrateEncoder(TIM_HandleTypeDef*, float)	40	static
+../Core/Src/encoder.cpp:64:9:int16_t Encoder::calculateAngle(uint16_t)	24	static
+../Core/Src/encoder.cpp:74:9:int16_t Encoder::encoderCompare()	32	static

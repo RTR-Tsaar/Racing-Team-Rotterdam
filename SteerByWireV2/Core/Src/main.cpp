@@ -154,14 +154,7 @@ int main(void)
 
 
   /* USER CODE BEGIN 1 */
-	float offset = 1.65f; // Voltage at 0 Amps
-	float vRef = 3.3f; // Voltage of microcontroller
-	float sensitivity = 0.185f;// mV between Amps
 
-	CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
-	CAN_ErrorFlags error_flags;
-	MotorControl motorControl(&htim2, TIM_CHANNEL_3);
-	Encoder encoder(&motorControl, &currentSensor, &htim2, &htim2, 65535, 1000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -189,6 +182,14 @@ int main(void)
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_ADC_Start(&hadc1);
 
+  float offset = 1.65f; // Voltage at 0 Amps
+  float vRef = 3.3f; // Voltage of microcontroller
+  float sensitivity = 0.185f;// mV between Amps
+
+  CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
+  CAN_ErrorFlags error_flags;
+  MotorControl motorControl(&htim2, TIM_CHANNEL_3);
+  Encoder encoder(&motorControl, &currentSensor, &htim2, &htim2, 65535, 1000);
   //Temporary variables for development and testing ------------------------------*/
   uint8_t canAngle[8];
   uint32_t counter = 978324;
@@ -300,7 +301,7 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
