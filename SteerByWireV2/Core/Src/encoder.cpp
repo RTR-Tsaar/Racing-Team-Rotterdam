@@ -33,8 +33,7 @@ void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 
 	while(!stalling){
 		motorCurrent = currentSensor->getCurrent();
-		motorControl->setDutyCycle(3000);
-		val = readEncoder(enc);
+		motorControl->setDutyCycle(65535);
 
 		if (motorCurrent >= stallCurrent) {
 			resetEncoderCount(enc);
@@ -49,7 +48,7 @@ void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 
 	while(!stalling){
 		motorCurrent = currentSensor->getCurrent();
-		motorControl->setDutyCycle(3000);
+		motorControl->setDutyCycle(32500);
 		if (motorCurrent >= stallCurrent) {
 			maxEncoderCount = __HAL_TIM_GET_COUNTER(enc);
 			motorControl->setDutyCycle(0);
