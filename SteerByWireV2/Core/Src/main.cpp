@@ -199,9 +199,7 @@ int main(void)
   globalcanbus.start(&hcan, CAN_ID_STD);
   motorControl.start();
 
-  while(1){
-  	  motorControl.setDutyCycle(30000);
-  }
+
   //  motorCurrent = currentSensor.getCurrent();
   encoder.calibrateEncoder(&htim2, 1.0f);
     //  canBus.error(&hcan, 2047);
