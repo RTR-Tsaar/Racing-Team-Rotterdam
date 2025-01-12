@@ -3,6 +3,7 @@
  *
  *  Created on: Nov 4, 2024
  *      Author: Dennis Boekholtz
+ *      Author: Rolan van Bommel
  */
 
 #include "CAN_bus.hpp"
@@ -11,58 +12,50 @@ CANBus::CANBus() {
     // Constructor implementation (if needed)
 }
 
-void CANBus::start(CAN_HandleTypeDef* hcan){
+void CANBus::start(CAN_HandleTypeDef* hcan, uint8_t LIDEE){
 
 	// Start CAN bus
     HAL_CAN_Start(hcan);
     HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
 
+    if(LIDEE == CAN_ID_STD){
+        TxHeader.ExtId = 0;		// 0 is standaard ID , 4 is extended ID
+        TxHeader.StdId = 2047;  // Set CAN ID to 2047
+    }
+    else{
+        TxHeader.ExtId = 2047;		// 0 is standaard ID , 4 is extended ID
+        TxHeader.StdId = 0;  // Set CAN ID to 2047
+    }
     // Initialize default values for CAN headers
     TxHeader.DLC = 8;
-    TxHeader.ExtId = 0;		// 0 is standaard ID , 1 is extended ID
-    TxHeader.IDE = CAN_ID_STD;
+    TxHeader.IDE = LIDEE;    // standaard ID = CAN_ID_STD, extended ID = CAN_ID_EXT
     TxHeader.RTR = CAN_RTR_DATA;
-    TxHeader.StdId = 2047;  // Set CAN ID to 2047
     TxHeader.TransmitGlobalTime = DISABLE;
 
 }
 
 // Transmit data
 void CANBus::transmit(CAN_HandleTypeDef* hcan, uint8_t* TxData, uint16_t id) {
-    TxHeader.DLC = 8;
-	TxHeader.StdId = id;
+    if (TxHeader.IDE == CAN_ID_STD){
+    	TxHeader.StdId = id;
+    }
+    else{
+    	TxHeader.ExtId = id;
+    }
+	TxHeader.DLC = 8;
     HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
 }
 
 void CANBus::configureFilter(CAN_HandleTypeDef* hcan, uint16_t ID, uint16_t Mask, uint8_t filterBank, uint8_t slaveFilterBank){
-/*
-	std::vector<uint16_t> results(numbers.size(), 0);
-	    for (size_t i = 0; i < numbers.size(); ++i) {
-	        for (size_t j = 0; j < numbers.size(); ++j) {
-	            if (i != j) {
-	                for (int k = 0; k < 11; ++k) {
-	                    uint16_t bitA = (numbers[i] >> k) & 1;
-	                    uint16_t bitB = (numbers[j] >> k) & 1;
-	                    if (bitA == 1 && bitB == 1) {
-	                        results[i] |= (1 << k); // Set bit to 1 if both bits are 1
-	                    } else if (bitA == 0 && bitB == 0) {
-	                        results[i] |= (0 << k); // Set bit to 0 if both bits are 0
-	                    } else {
-	                        results[i] |= (1 << k); // Set bit to 1 if one bit is 1 and the other is 0
-	                    }
-	                }
-	            }
-	        }
-	    }
-*/
+
 	  CAN_FilterTypeDef canFilterConfig;
 
 	  canFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
 	  canFilterConfig.FilterBank = filterBank;
 	  canFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
-	  canFilterConfig.FilterIdHigh = 105 << 5;
+	  canFilterConfig.FilterIdHigh = 0 << 5;
 	  canFilterConfig.FilterIdLow = 0x0000;
-	  canFilterConfig.FilterMaskIdHigh = 105 << 5;
+	  canFilterConfig.FilterMaskIdHigh = 0 << 5;
 	  canFilterConfig.FilterMaskIdLow = 0x0000;
 	  canFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	  canFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
@@ -75,4 +68,37 @@ void CANBus::error(CAN_HandleTypeDef* hcan, uint16_t id) {
     TxHeader.DLC = 0;
 	TxHeader.StdId = id;
     HAL_CAN_AddTxMessage(hcan, &TxHeader, NULL, &TxMailbox);
+}
+
+void CANBus::storeCAN(uint32_t can_id, uint64_t Data){
+	can_IDs.push_back(can_id);
+    can_DATA.push_back(Data);
+}
+
+void CANBus::dataSplitter(uint32_t data, uint8_t* bytes) {
+    // Split the 32-bit integer into 4 bytes
+    bytes[0] = (data >> 24) & 0xFF; // Most significant byte
+    bytes[1] = (data >> 16) & 0xFF;
+    bytes[2] = (data >> 8) & 0xFF;
+    bytes[3] = data & 0xFF;         // Least significant byte
+}
+
+uint32_t CANBus::dataMerger(uint8_t *data) {
+    uint32_t extracted_value = 0;
+    extracted_value |= (uint32_t)data[0] << 24; // Most significant byte
+    extracted_value |= (uint32_t)data[1] << 16;
+    extracted_value |= (uint32_t)data[2] << 8;
+    extracted_value |= (uint32_t)data[3];      // Least significant byte
+    return extracted_value;
+}
+
+bool CANBus::getLastData(uint32_t& can_id, uint64_t& data) {
+    if (!can_IDs.empty() && !can_DATA.empty()) {
+        can_id = can_IDs.back();
+        data = can_DATA.back();
+        can_IDs.pop_back();
+        can_DATA.pop_back();
+        return true;
+    }
+    return false;
 }

@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include <main.hpp>
+#include "CAN_Bus.hpp"
 #include "throttle.hpp"
 /* USER CODE END Includes */
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +47,25 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 uint8_t throttleLevel;
+CANBus globalCanBus;
 
+CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
+uint8_t RxData[8];
+uint32_t can_id;
+uint32_t received_value;
+uint32_t received_value2;
+
+typedef struct {
+    uint8_t error_warning_flag;
+    uint8_t error_passive_flag;
+    uint8_t bus_off_flag;
+    uint8_t stuff_error;
+    uint8_t form_error;
+    uint8_t acknowledgment_error;
+    uint8_t bit_recessive_error;
+    uint8_t bit_dominant_error;
+    uint8_t crc_error;
+} CAN_ErrorFlags;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,7 +82,65 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
+	if (RxHeader.StdId == 446) {
+		received_value = globalCanBus.dataMerger(RxData);
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	}
+	else if(RxHeader.StdId == 300) {
+		received_value2 = globalCanBus.dataMerger(RxData);
+	}
+	else{
+		Error_Handler();
+	}
 
+}
+
+void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
+    uint32_t error = HAL_CAN_GetError(hcan);
+
+    // Reset all error flags
+    error_flags->error_warning_flag = 0;
+    error_flags->error_passive_flag = 0;
+    error_flags->bus_off_flag = 0;
+    error_flags->stuff_error = 0;
+    error_flags->form_error = 0;
+    error_flags->acknowledgment_error = 0;
+    error_flags->bit_recessive_error = 0;
+    error_flags->bit_dominant_error = 0;
+    error_flags->crc_error = 0;
+
+    if (error != HAL_CAN_ERROR_NONE) {
+        if (error & HAL_CAN_ERROR_EWG) {
+            error_flags->error_warning_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_EPV) {
+            error_flags->error_passive_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_BOF) {
+            error_flags->bus_off_flag = 1;
+        }
+        if (error & HAL_CAN_ERROR_STF) {
+            error_flags->stuff_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_FOR) {
+            error_flags->form_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_ACK) {
+            error_flags->acknowledgment_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_BR) {
+            error_flags->bit_recessive_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_BD) {
+            error_flags->bit_dominant_error = 1;
+        }
+        if (error & HAL_CAN_ERROR_CRC) {
+            error_flags->crc_error = 1;
+        }
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -104,6 +181,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start(&hadc1);
 
+  globalCanBus.start(&hcan, CAN_ID_STD);
+  uint8_t list[8];
   /* USER CODE END 2 */
 
 
@@ -112,6 +191,8 @@ int main(void)
   {
 
 	  throttleLevel = throttle.readThrottle();
+	  list[0] = throttleLevel;
+	  globalCanBus.transmit(&hcan, list, 200);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

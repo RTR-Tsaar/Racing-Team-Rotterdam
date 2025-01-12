@@ -48,7 +48,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-CANBus globalcanbus;
+CANBus globalCanBus;
 float motorCurrent;
 
 CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
@@ -86,11 +86,11 @@ static void MX_TIM3_Init(void);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
 	if (RxHeader.StdId == 446) {
-		received_value = globalcanbus.dataMerger(RxData);
+		received_value = globalCanBus.dataMerger(RxData);
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 	}
 	else if(RxHeader.StdId == 300) {
-		received_value2 = globalcanbus.dataMerger(RxData);
+		received_value2 = globalCanBus.dataMerger(RxData);
 	}
 	else{
 		Error_Handler();
@@ -192,11 +192,10 @@ int main(void)
   Encoder encoder(&motorControl, &currentSensor, &htim2, &htim2, 65535, 1000);
   //Temporary variables for development and testing ------------------------------*/
   uint8_t canAngle[8];
-  uint32_t counter = 978324;
   uint8_t desiredAngle[8];
   uint32_t counter2 = 9999999;
   //---------------------------------------------------------------------------*/
-  globalcanbus.start(&hcan, CAN_ID_STD);
+  globalCanBus.start(&hcan, CAN_ID_STD);
   motorControl.start();
 
 
@@ -212,13 +211,13 @@ int main(void)
   {
 	  uint16_t currentCount = encoder.readEncoder(&htim2);
 	  int16_t currentAngle = encoder.calculateAngle(currentCount);
-	  motorControl.steerToAngle(currentAngle, 50);
+	  motorControl.steerToAngle(currentAngle, 500);
 
-	  globalcanbus.dataSplitter(counter, canAngle);
-	  globalcanbus.dataSplitter(counter2, desiredAngle);
+	  globalCanBus.dataSplitter(currentAngle, canAngle);
+	  globalCanBus.dataSplitter(counter2, desiredAngle);
 
-	  globalcanbus.transmit(&hcan, canAngle, 446);
-	  globalcanbus.transmit(&hcan, desiredAngle, 300);
+	  globalCanBus.transmit(&hcan, canAngle, 446);
+	  globalCanBus.transmit(&hcan, desiredAngle, 300);
 	  //	  int length = sizeof(canAngle)/sizeof(canAngle[0]);
 	  HAL_Delay(300);
     /* USER CODE END WHILE */
@@ -353,7 +352,7 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-  globalcanbus.configureFilter(&hcan, 0b00100010000, 0b00110110000, 10, 0);
+  globalCanBus.configureFilter(&hcan, 0b00100010000, 0b00110110000, 10, 0);
 
   /* USER CODE END CAN_Init 2 */
 
