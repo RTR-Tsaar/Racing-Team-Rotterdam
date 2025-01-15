@@ -54,7 +54,7 @@ float motorCurrent;
 CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
 uint8_t RxData[8];
 uint32_t can_id;
-uint32_t received_value;
+int received_value;
 uint32_t received_value2;
 
 typedef struct {
@@ -180,7 +180,6 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-  HAL_ADC_Start(&hadc1);
 
   float offset = 1.65f; // Voltage at 0 Amps
   float vRef = 3.3f; // Voltage of microcontroller
@@ -199,8 +198,10 @@ int main(void)
   motorControl.start();
 
 
+
   //  motorCurrent = currentSensor.getCurrent();
   encoder.calibrateEncoder(&htim2, 1.0f);
+
     //  canBus.error(&hcan, 2047);
     //  canBus.error(&hcan, 0x38b);
   /* USER CODE END 2 */
