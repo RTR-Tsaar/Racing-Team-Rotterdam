@@ -25,7 +25,7 @@ void Encoder::resetEncoderCount(TIM_HandleTypeDef* enc){
 
 void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 
-	int lowSpeed = 65535;
+	int lowSpeed = 10000;
 	float motorCurrent;
 	int encoderReading;
 
@@ -48,16 +48,13 @@ void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 		}
 		HAL_Delay(100);
 
-
 	}
 
 //	encoderReading = readEncoder(enc);
-
 	stalling = false;
 
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 	motorControl->setDutyCycle(lowSpeed);
-
 
 	while(!stalling){
 		motorCurrent = currentSensor->getCurrent();

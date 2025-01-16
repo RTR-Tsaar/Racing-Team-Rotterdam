@@ -199,7 +199,6 @@ int main(void)
 
 
 
-  //  motorCurrent = currentSensor.getCurrent();
   encoder.calibrateEncoder(&htim2, 1.0f);
 
     //  canBus.error(&hcan, 2047);
@@ -210,17 +209,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint16_t currentCount = encoder.readEncoder(&htim2);
+	  uint32_t currentCount = encoder.readEncoder(&htim2);
 	  int16_t currentAngle = encoder.calculateAngle(currentCount);
-	  motorControl.steerToAngle(currentAngle, 500);
+	  motorControl.steerToAngle(currentAngle, 0);
 
 	  globalCanBus.dataSplitter(currentAngle, canAngle);
 	  globalCanBus.dataSplitter(counter2, desiredAngle);
 
 	  globalCanBus.transmit(&hcan, canAngle, 446);
 	  globalCanBus.transmit(&hcan, desiredAngle, 300);
-	  //	  int length = sizeof(canAngle)/sizeof(canAngle[0]);
-	  HAL_Delay(300);
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

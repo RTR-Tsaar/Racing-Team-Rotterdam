@@ -10,7 +10,7 @@
 
 // Constructor
 MotorControl::MotorControl(TIM_HandleTypeDef* timer, uint32_t channel)
-    : htim(timer), channel(channel), lastDirection(GPIO_PIN_SET),
+    : htim(timer), channel(channel),
       integral(0.0f), previousError(0.0f) {}
 
 // Starts PWM
@@ -24,15 +24,15 @@ void MotorControl::setDutyCycle(uint16_t dutyCycle) {
 }
 
 void MotorControl::toggleDirection() {
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_9);
+	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
 }
 
 // PID controller implementation
-int16_t MotorControl::calculatePID(uint16_t targetAngle, uint16_t currentAngle) {
+int MotorControl::calculatePID(int targetAngle, int currentAngle) {
     const float dt = 0.01f; // Fixed dt in seconds (10ms)
 
     // Error calculation
-    float error = static_cast<float>(targetAngle - currentAngle);
+    int error = targetAngle - currentAngle;
 
     // Integral windup prevention
     integral += error * dt;
@@ -46,37 +46,34 @@ int16_t MotorControl::calculatePID(uint16_t targetAngle, uint16_t currentAngle) 
     float output = (KP * error) + (KI * integral) + (KD * derivative);
 
     // Constrain output to valid range
-    if (output > MAX_OUTPUT) output = MAX_OUTPUT;
-    if (output < MIN_OUTPUT) output = MIN_OUTPUT;
+//    if (output > MAX_OUTPUT) output = MAX_OUTPUT;
+//    if (output < MIN_OUTPUT) output = MIN_OUTPUT;
 
 
     // Update previous error for the next iteration
     previousError = error;
 
-    return static_cast<int16_t>(output);
+    return static_cast<int>(output);
 }
 
 // Steers to target angle using PID
-void MotorControl::steerToAngle(uint16_t currentAngle, uint16_t targetAngle) {
-    int16_t pidOutput = calculatePID(targetAngle, currentAngle);
+void MotorControl::steerToAngle(int currentAngle, int targetAngle) {
+    int pidOutput = calculatePID(targetAngle, currentAngle);
 
-    // Apply dead zone
-    if (std::abs(pidOutput) < DEAD_ZONE_THRESHOLD) {
-        setDutyCycle(0);
-        return;
-    }
+    int ampedOutput = pidOutput * 10;
+
+    if (ampedOutput > MAX_OUTPUT) ampedOutput = MAX_OUTPUT;
+    if (ampedOutput < MIN_OUTPUT) ampedOutput = MIN_OUTPUT;
+
+
 
     // Determine direction and apply PWM
-    if (pidOutput < 0) {
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // Reverse direction
-        setDutyCycle(static_cast<uint16_t>(-pidOutput));      // Positive duty cycle
+    if (ampedOutput < 0) {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET); // Reverse direction
+        setDutyCycle(static_cast<uint16_t>(-ampedOutput));      // Positive duty cycle
     } else {
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);   // Forward direction
-        setDutyCycle(static_cast<uint16_t>(pidOutput));
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);   // Forward direction
+        setDutyCycle(static_cast<uint16_t>(ampedOutput));
     }
 }
 
-// Check if target angle is reached
-bool MotorControl::isTargetReached(uint16_t currentAngle, uint16_t targetAngle) {
-    return std::abs(static_cast<float>(targetAngle - currentAngle)) < ACCEPTABLE_ERROR_MARGIN;
-}
