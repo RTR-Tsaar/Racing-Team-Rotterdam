@@ -58,34 +58,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := ThrottleByWireC6
+BUILD_ARTIFACT_NAME := ThrottleByWire
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-ThrottleByWireC6.elf \
+ThrottleByWire.elf \
 
 MAP_FILES += \
-ThrottleByWireC6.map \
+ThrottleByWire.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-ThrottleByWireC6.list \
+ThrottleByWire.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: ThrottleByWireC6.elf secondary-outputs
+main-build: ThrottleByWire.elf secondary-outputs
 
 # Tool invocations
-ThrottleByWireC6.elf ThrottleByWireC6.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "ThrottleByWireC6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ThrottleByWireC6.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+ThrottleByWire.elf ThrottleByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "ThrottleByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ThrottleByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -94,14 +94,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-ThrottleByWireC6.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "ThrottleByWireC6.list"
+ThrottleByWire.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "ThrottleByWire.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) ThrottleByWireC6.elf ThrottleByWireC6.list ThrottleByWireC6.map default.size.stdout
+	-$(RM) ThrottleByWire.elf ThrottleByWire.list ThrottleByWire.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
