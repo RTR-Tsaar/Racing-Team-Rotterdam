@@ -1633,8 +1633,8 @@ void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
  8000d10:	60b9      	str	r1, [r7, #8]
  8000d12:	607a      	str	r2, [r7, #4]
 
-	int lowSpeed = 10000;
- 8000d14:	f242 7310 	movw	r3, #10000	@ 0x2710
+	int lowSpeed = 65000;
+ 8000d14:	f64f 53e8 	movw	r3, #65000	@ 0xfde8
  8000d18:	61bb      	str	r3, [r7, #24]
 	float motorCurrent;
 	int encoderReading;

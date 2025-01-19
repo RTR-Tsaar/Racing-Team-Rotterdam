@@ -1,6 +1,6 @@
-../Core/Src/encoder.cpp:11:1:Encoder::Encoder(MotorControl*, TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint16_t, float)	8	static
-../Core/Src/encoder.cpp:16:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	0	static
-../Core/Src/encoder.cpp:21:6:void Encoder::resetEncoderCount(TIM_HandleTypeDef*)	0	static
-../Core/Src/encoder.cpp:25:6:void Encoder::calibrateEncoder(TIM_HandleTypeDef*, uint16_t)	16	static
-../Core/Src/encoder.cpp:57:9:int16_t Encoder::calculateAngle(uint16_t)	0	static
-../Core/Src/encoder.cpp:67:9:int16_t Encoder::encoderCompare()	0	static
+../Core/Src/encoder.cpp:12:1:Encoder::Encoder(MotorControl*, CurrentSensor*, TIM_HandleTypeDef*, TIM_HandleTypeDef*, uint16_t, float)	8	static
+../Core/Src/encoder.cpp:17:10:uint32_t Encoder::readEncoder(TIM_HandleTypeDef*)	0	static
+../Core/Src/encoder.cpp:22:6:void Encoder::resetEncoderCount(TIM_HandleTypeDef*)	0	static
+../Core/Src/encoder.cpp:26:6:void Encoder::calibrateEncoder(TIM_HandleTypeDef*, float)	24	static
+../Core/Src/encoder.cpp:73:9:int16_t Encoder::calculateAngle(uint16_t)	0	static
+../Core/Src/encoder.cpp:83:9:int16_t Encoder::encoderCompare()	0	static

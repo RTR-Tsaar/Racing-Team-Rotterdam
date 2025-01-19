@@ -58,34 +58,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := SteerByWireV2
+BUILD_ARTIFACT_NAME := SteerByWire
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-SteerByWireV2.elf \
+SteerByWire.elf \
 
 MAP_FILES += \
-SteerByWireV2.map \
+SteerByWire.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-SteerByWireV2.list \
+SteerByWire.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: SteerByWireV2.elf secondary-outputs
+main-build: SteerByWire.elf secondary-outputs
 
 # Tool invocations
-SteerByWireV2.elf SteerByWireV2.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "SteerByWireV2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteerByWireV2.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+SteerByWire.elf SteerByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "SteerByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteerByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -94,14 +94,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-SteerByWireV2.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "SteerByWireV2.list"
+SteerByWire.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "SteerByWire.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) SteerByWireV2.elf SteerByWireV2.list SteerByWireV2.map default.size.stdout
+	-$(RM) SteerByWire.elf SteerByWire.list SteerByWire.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

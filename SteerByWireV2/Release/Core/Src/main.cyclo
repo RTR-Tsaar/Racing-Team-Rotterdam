@@ -1,7 +1,7 @@
-../Core/Src/main.cpp:83:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	3
-../Core/Src/main.cpp:99:6:void check_CAN_errors(CAN_HandleTypeDef*, CAN_ErrorFlags*)	3
-../Core/Src/main.cpp:227:6:void SystemClock_Config()	4
-../Core/Src/main.cpp:149:5:int main()	8
-../Core/Src/main.cpp:466:6:void Error_Handler()	1
-../Core/Src/main.cpp:475:1:cpp)	1
-../Core/Src/main.cpp:475:1:cpp)	3
+../Core/Src/main.cpp:86:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	3
+../Core/Src/main.cpp:102:6:void check_CAN_errors(CAN_HandleTypeDef*, CAN_ErrorFlags*)	3
+../Core/Src/main.cpp:233:6:void SystemClock_Config()	4
+../Core/Src/main.cpp:152:5:int main()	11
+../Core/Src/main.cpp:521:6:void Error_Handler()	1
+../Core/Src/main.cpp:530:1:cpp)	1
+../Core/Src/main.cpp:530:1:cpp)	3
