@@ -25,7 +25,7 @@ void Encoder::resetEncoderCount(TIM_HandleTypeDef* enc){
 
 void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 
-	int lowSpeed = 65000;
+	int lowSpeed = 10000;
 	float motorCurrent;
 	int encoderReading;
 
