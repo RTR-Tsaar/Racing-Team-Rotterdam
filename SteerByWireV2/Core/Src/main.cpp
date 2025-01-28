@@ -83,6 +83,8 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+//This method is used to receive CAN-bus data and store said data in a variable based on the CAN ID of the received message
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData);
 	if (RxHeader.StdId == 446) {
@@ -98,7 +100,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 
 }
 
-
+//This method can be used to check for and read out CAN bus errors.
 void check_CAN_errors(CAN_HandleTypeDef *hcan, CAN_ErrorFlags *error_flags) {
     uint32_t error = HAL_CAN_GetError(hcan);
 
@@ -181,10 +183,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
 
+  //The following values are used for the Current sensor
   float offset = 1.65f; // Voltage at 0 Amps
   float vRef = 3.3f; // Voltage of microcontroller
   float sensitivity = 0.185f;// mV between Amps
 
+  //Initialization of all the classes used.
   CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);
   CAN_ErrorFlags error_flags;
   MotorControl motorControl(&htim3, TIM_CHANNEL_1);
@@ -209,14 +213,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint32_t currentCount = encoder.readEncoder(&htim2);
-	  int16_t currentAngle = encoder.calculateAngle(currentCount);
-	  motorControl.steerToAngle(currentAngle, 0);
+	  uint32_t currentCount = encoder.readEncoder(&htim2); //Reads out encoder postition. Swap this function with encoder.encoderCompare to use 2 encoders.
+	  int16_t currentAngle = encoder.calculateAngle(currentCount); //Translates raw position to usable angle
+	  motorControl.steerToAngle(currentAngle, 0); //Steers to the target angle currently set at 0.
 
-	  globalCanBus.dataSplitter(currentAngle, canAngle);
+	  globalCanBus.dataSplitter(currentAngle, canAngle); //Used to split data into byte lists for the CANbus messages
 	  globalCanBus.dataSplitter(counter2, desiredAngle);
 
-	  globalCanBus.transmit(&hcan, canAngle, 446);
+	  globalCanBus.transmit(&hcan, canAngle, 446); //transmits data over the CANbus lines
 	  globalCanBus.transmit(&hcan, desiredAngle, 300);
 	  HAL_Delay(100);
     /* USER CODE END WHILE */

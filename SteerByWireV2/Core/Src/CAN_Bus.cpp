@@ -27,7 +27,7 @@ void CANBus::start(CAN_HandleTypeDef* hcan, uint8_t LIDEE){
         TxHeader.StdId = 0;  // Set CAN ID to 2047
     }
     // Initialize default values for CAN headers
-    TxHeader.DLC = 8;
+    TxHeader.DLC = 8;		//Sets the data length to 8 bytes
     TxHeader.IDE = LIDEE;    // standaard ID = CAN_ID_STD, extended ID = CAN_ID_EXT
     TxHeader.RTR = CAN_RTR_DATA;
     TxHeader.TransmitGlobalTime = DISABLE;
@@ -46,6 +46,7 @@ void CANBus::transmit(CAN_HandleTypeDef* hcan, uint8_t* TxData, uint16_t id) {
     HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
 }
 
+//This method is used to configure the CAN-bus filter. We do this to only receive the range of CAN-bus messages meant for us.
 void CANBus::configureFilter(CAN_HandleTypeDef* hcan, uint16_t ID, uint16_t Mask, uint8_t filterBank, uint8_t slaveFilterBank){
 
 	  CAN_FilterTypeDef canFilterConfig;
@@ -75,6 +76,8 @@ void CANBus::storeCAN(uint32_t can_id, uint64_t Data){
     can_DATA.push_back(Data);
 }
 
+//This method is used to split larger than single byte values into a list of seperate bytes.
+//We do this because the CANbus framework on STM expects a list of bytes as input.
 void CANBus::dataSplitter(uint32_t data, uint8_t* bytes) {
     // Split the 32-bit integer into 4 bytes
     bytes[0] = (data >> 24) & 0xFF; // Most significant byte
@@ -83,6 +86,7 @@ void CANBus::dataSplitter(uint32_t data, uint8_t* bytes) {
     bytes[3] = data & 0xFF;         // Least significant byte
 }
 
+//This method is used to merge split data from a recieved CANbus frame. This way we can reconstruct the previously split data
 uint32_t CANBus::dataMerger(uint8_t *data) {
     uint32_t extracted_value = 0;
     extracted_value |= (uint32_t)data[0] << 24; // Most significant byte

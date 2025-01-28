@@ -14,60 +14,60 @@ Encoder::Encoder(MotorControl* motorControl, CurrentSensor* currentSensor, TIM_H
     // Constructor
 };
 
+//This method reads out an encoders value
 uint32_t Encoder::readEncoder(TIM_HandleTypeDef* enc) {
     // Reads encoder data
     return __HAL_TIM_GET_COUNTER(enc);
 }
 
+//This method is used to set the encoder reading to zero.
 void Encoder::resetEncoderCount(TIM_HandleTypeDef* enc){
 	__HAL_TIM_SET_COUNTER(enc, 0);
 }
 
+//This method calibrates the encoder to make sure it accuratly reads the correct steering angle.
 void Encoder::calibrateEncoder(TIM_HandleTypeDef* enc, float stallCurrent){
 
-	int lowSpeed = 10000;
+	int lowSpeed = 10000; //This value decides the speed at which the motor will turn. Max speed is 65535.
 	float motorCurrent;
 	int encoderReading;
 
 	bool stalling = false; //Checks if the steering motor is stalled. We need this to know when the steering system has reached full lock
 
-	currentSensor->start();
+	currentSensor->start();//Starts the adc channel of the current sensor
 
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 	motorControl->setDutyCycle(lowSpeed);
 
-	while(!stalling){
-		motorCurrent = currentSensor->getCurrent();
+	while(!stalling){		//As long as the motor isn't stalling it will remain in this loop.
+		motorCurrent = currentSensor->getCurrent(); //Reads out the current
 
-//		encoderReading = readEncoder(enc);
-
+		//If th motorcurrent is equal or higher than the stall current, it means the motor is stalling and has reached full lock.
 		if (motorCurrent >= stallCurrent) {
-			resetEncoderCount(enc);
-			motorControl->setDutyCycle(0);
-			stalling = true;
+			resetEncoderCount(enc);	//When full lock is reached the encoder is reset. This way we know that an encoder reading of 0 means full lock to the left.
+			motorControl->setDutyCycle(0);//Stops the motor from turning
+			stalling = true;	//Allows the code to continue out of the while loop.
 		}
 		HAL_Delay(100);
 
 	}
 
-//	encoderReading = readEncoder(enc);
 	stalling = false;
 
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-	motorControl->setDutyCycle(lowSpeed);
+	motorControl->toggleDirection(); //Changes direction of the motor
+	motorControl->setDutyCycle(lowSpeed);	//Allows motor to turn at low speed
 
+	//This loop does the same is the previous one. The main difference is it records the position at full lock, instead of setting it to zero.
 	while(!stalling){
 		motorCurrent = currentSensor->getCurrent();
-//		encoderReading = readEncoder(enc);
 
 		if (motorCurrent >= stallCurrent) {
-			maxEncoderCount = __HAL_TIM_GET_COUNTER(enc);
+			maxEncoderCount = __HAL_TIM_GET_COUNTER(enc); //records maximum encoder rotation to give us the full range of the encoder.
 			motorControl->setDutyCycle(0);
 			stalling = true;
 		}
 		HAL_Delay(100);
 	}
-	currentSensor->stop();
+	currentSensor->stop();//Turns of the adc channel for the current sensor as we no longer need it.
 }
 
 int16_t Encoder::calculateAngle(uint16_t count) {

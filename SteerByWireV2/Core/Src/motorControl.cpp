@@ -22,7 +22,7 @@ void MotorControl::start() {
 void MotorControl::setDutyCycle(uint16_t dutyCycle) {
     __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle);
 }
-
+//This method can be used to toggle the direction of the motor
 void MotorControl::toggleDirection() {
 	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
 }
@@ -44,11 +44,6 @@ int MotorControl::calculatePID(int targetAngle, int currentAngle) {
 
     // PID calculations
     float output = (KP * error) + (KI * integral) + (KD * derivative);
-
-    // Constrain output to valid range
-//    if (output > MAX_OUTPUT) output = MAX_OUTPUT;
-//    if (output < MIN_OUTPUT) output = MIN_OUTPUT;
-
 
     // Update previous error for the next iteration
     previousError = error;
