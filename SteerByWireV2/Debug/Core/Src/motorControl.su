@@ -1,6 +1,0 @@
-../Core/Src/motorControl.cpp:12:1:MotorControl::MotorControl(TIM_HandleTypeDef*, uint32_t)	24	static
-../Core/Src/motorControl.cpp:17:6:void MotorControl::start()	16	static
-../Core/Src/motorControl.cpp:22:6:void MotorControl::setDutyCycle(uint16_t)	16	static
-../Core/Src/motorControl.cpp:26:6:void MotorControl::toggleDirection()	16	static
-../Core/Src/motorControl.cpp:31:5:int MotorControl::calculatePID(int, int)	48	static
-../Core/Src/motorControl.cpp:60:6:void MotorControl::steerToAngle(int, int)	32	static

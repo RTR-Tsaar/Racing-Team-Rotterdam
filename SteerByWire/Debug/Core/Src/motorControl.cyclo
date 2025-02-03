@@ -1,0 +1,6 @@
+../Core/Src/motorControl.cpp:12:1:MotorControl::MotorControl(TIM_HandleTypeDef*, uint32_t)	1
+../Core/Src/motorControl.cpp:17:6:void MotorControl::start()	1
+../Core/Src/motorControl.cpp:22:6:void MotorControl::setDutyCycle(uint16_t)	4
+../Core/Src/motorControl.cpp:26:6:void MotorControl::toggleDirection()	1
+../Core/Src/motorControl.cpp:31:5:int MotorControl::calculatePID(int, int)	3
+../Core/Src/motorControl.cpp:55:6:void MotorControl::steerToAngle(int, int)	4
