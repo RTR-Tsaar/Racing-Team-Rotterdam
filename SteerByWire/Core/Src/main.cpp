@@ -186,9 +186,9 @@ int main(void)
 
 
   //The following values are used for the Current sensor
-  float offset = 1.65f; // Voltage at 0 Amps
+  float offset = 1.65f; // Voltage at 0 Amps To calculate this value take the vref and divide by 2
   float vRef = 3.3f; // Voltage of microcontroller
-  float sensitivity = 0.185f;// mV between Amps
+  float sensitivity = 0.185f;// mV between Amps. This value depends on the current sensor used. Check documentation of current sensor to find sensitivity.
 
   //Initialization of all the classes used.
   CurrentSensor currentSensor(&hadc1, vRef, sensitivity, offset);

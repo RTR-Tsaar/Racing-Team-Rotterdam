@@ -84,8 +84,8 @@ all: main-build
 main-build: SteerByWire.elf secondary-outputs
 
 # Tool invocations
-SteerByWire.elf SteerByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "SteerByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\SteerByWireV2\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteerByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+SteerByWire.elf SteerByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\SteerByWire\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "SteerByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\SteerByWire\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteerByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
