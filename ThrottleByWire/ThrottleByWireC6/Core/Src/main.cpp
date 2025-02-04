@@ -46,7 +46,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-uint8_t throttleLevel;
+uint8_t throttleLevel = 0;
 CANBus globalCanBus;
 
 CAN_RxHeaderTypeDef RxHeader;  // CAN transmit header
@@ -182,7 +182,7 @@ int main(void)
   HAL_ADC_Start(&hadc1);
 
   globalCanBus.start(&hcan, CAN_ID_STD);
-  uint8_t list[8];
+  uint8_t throttleCanFrame[8];
   /* USER CODE END 2 */
 
 
@@ -191,8 +191,8 @@ int main(void)
   {
 
 	  throttleLevel = throttle.readThrottle();
-	  list[0] = throttleLevel;
-	  globalCanBus.transmit(&hcan, list, 200);
+	  throttleCanFrame[0] = throttleLevel;
+	  globalCanBus.transmit(&hcan, throttleCanFrame, 200);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

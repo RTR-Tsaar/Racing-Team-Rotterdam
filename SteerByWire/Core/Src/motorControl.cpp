@@ -65,7 +65,7 @@ void MotorControl::steerToAngle(int currentAngle, int targetAngle) {
     // Determine direction and apply PWM
     if (amplifiedOutput < 0) {
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET); // Reverse direction
-        setDutyCycle(static_cast<uint16_t>(-ampedOutput));      // Positive duty cycle
+        setDutyCycle(static_cast<uint16_t>(-amplifiedOutput));      // Positive duty cycle
     } else {
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);   // Forward direction
         setDutyCycle(static_cast<uint16_t>(amplifiedOutput));
