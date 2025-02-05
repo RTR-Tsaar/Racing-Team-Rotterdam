@@ -20,7 +20,7 @@ void MotorControl::start() {
 
 // Sets steer speed (duty cycle)
 void MotorControl::setDutyCycle(uint16_t dutyCycle) {
-    __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle);
+    __HAL_TIM_SET_COMPARE(htim, channel, dutyCycle); //Max duty cycle is 65535
 }
 //This method can be used to toggle the direction of the motor
 void MotorControl::toggleDirection() {
@@ -55,20 +55,20 @@ int MotorControl::calculatePID(int targetAngle, int currentAngle) {
 void MotorControl::steerToAngle(int currentAngle, int targetAngle) {
     int pidOutput = calculatePID(targetAngle, currentAngle);
 
-    int ampedOutput = pidOutput * 10;
+    int amplifiedOutput = pidOutput * 10;
 
-    if (ampedOutput > MAX_OUTPUT) ampedOutput = MAX_OUTPUT;
-    if (ampedOutput < MIN_OUTPUT) ampedOutput = MIN_OUTPUT;
+    if (amplifiedOutput > MAX_OUTPUT) amplifiedOutput = MAX_OUTPUT;
+    if (amplifiedOutput < MIN_OUTPUT) amplifiedOutput = MIN_OUTPUT;
 
 
 
     // Determine direction and apply PWM
-    if (ampedOutput < 0) {
+    if (amplifiedOutput < 0) {
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET); // Reverse direction
-        setDutyCycle(static_cast<uint16_t>(-ampedOutput));      // Positive duty cycle
+        setDutyCycle(static_cast<uint16_t>(-amplifiedOutput));      // Positive duty cycle
     } else {
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);   // Forward direction
-        setDutyCycle(static_cast<uint16_t>(ampedOutput));
+        setDutyCycle(static_cast<uint16_t>(amplifiedOutput));
     }
 }
 
