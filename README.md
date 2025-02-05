@@ -92,19 +92,21 @@ Elk subsystem bevindt zich in een aparte map:
 -   `steer-by-wire/`
 -   `throttle-by-wire/`
 -   `brake-by-wire/`
--   `powertrain/`
+-   `aandrijving/`
 -   `mcu/`
+-   `CAN_bus_algemeen` (CAN-bus poc en testomgeving)
 
 Volg de instructies in de README-bestanden van de respectieve mappen om de software te bouwen en te uploaden naar de bijbehorende microcontroller. Hier vind je ook meer uitleg over de werking van de code.
 
 ## Projectstructuur
 
 ```
-Racing-Team-Rotterdam/  
+Racing-Team-Rotterdam/
+├── CAN_bus_algemeen/ (CAN-bus poc en testomgeving)
 ├── steer-by-wire/  
 ├── throttle-by-wire/  
 ├── brake-by-wire/
-├── powertrain/
+├── aandrijving/
 ├── mcu/  
 └── docs/ (bevat systeemarchitectuur en ontwerpdocumentatie)  
 
