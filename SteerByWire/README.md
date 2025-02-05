@@ -190,7 +190,7 @@ Om dit subsysteem te gebruiken op een breadboard zijn de volgende onderdelen nod
 
 #### Aansluiting
 Met de bovenstaande onderdelen kan het systeem als volgt worden aangesloten:
-![breadboard aansluiting steer by wire](/Docs/Steer-by-wire%20breadboard%20aansluiting.png)
+![breadboard aansluiting steer by wire](Docs/Steer-by-wire%20breadboard%20aansluiting.png)
 
 
 ### PCB aansluiting
