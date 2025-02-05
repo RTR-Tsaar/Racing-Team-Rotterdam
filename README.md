@@ -112,7 +112,7 @@ Racing-Team-Rotterdam/
 
 ## Gebruik
 
-1. Verbind de microcontrollers volgens het aansluitschema in de `docs/` map. 
+1. Verbind de microcontrollers volgens het aansluitschema in de `README.md` van het project dat u wilt gebruiken. 
 2. Flash de software naar de bijbehorende STM-microcontroller met behulp van STM32CubeIDE en een ST-Link programmer.
 
 
@@ -129,10 +129,5 @@ Bijdragen zijn van harte welkom! Volg deze stappen om bij te dragen:
 
 Dit project is gelicenseerd onder de MIT-licentie. Zie het LICENSE-bestand voor meer informatie.
 
-## Contact
-
-Voor vragen of meer informatie, neem contact met ons op:
-
--   E-mail: [placeholder@example.com](mailto:placeholder@example.com)
 
 
