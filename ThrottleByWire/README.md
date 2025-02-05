@@ -16,7 +16,6 @@ Dit project bevat de complete software voor het throttle-by-wire sub systeem voo
 -   [Hardware](#hardware)
 	- [Breadboard aansluiting](#breadboard-aansluiting)
 	- [PCB aansluiting](#pcb-aansluiting)
--   [Troubleshooting](#troubleshooting)
 
 
 ## Kenmerken
@@ -128,8 +127,8 @@ Om het systeem aan te sluiten via de sub module pcb zijn de volgende onderdelen:
 Deze onderdelen kunnen daarna als volg worden aangesloten aan de pcb:
 ![pcb aansluiting throttle by wire](Docs/Throttle%20pcb%20wiring.jpeg)
 
-Voor meer informatie over de sub module pcb ga naar het [KiCad bestand](././Docs/kicad)
-
+Voor meer informatie over de sub module pcb, download het [KiCad project](https://github.com/RTR-Tsaar/Racing-Team-Rotterdam/Docs/RTR%20submodule/RTR_submodule) en open het in kicad.
+[KiCad Download Link](https://www.kicad.org/download/)
 
 
 > Written with [StackEdit](https://stackedit.io/).
