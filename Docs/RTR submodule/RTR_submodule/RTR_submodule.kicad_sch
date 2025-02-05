@@ -1,0 +1,89 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "adf545d5-32fa-4c45-9a89-804aac391569")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 45.72 81.28)
+		(size 44.45 35.56)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "371ad9bc-6c0e-4880-bfac-e09ae597997b")
+		(property "Sheetname" "SUBmodule"
+			(at 45.72 80.5684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "SUBmodule.kicad_sch"
+			(at 45.72 117.4246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "RTR_submodule"
+				(path "/adf545d5-32fa-4c45-9a89-804aac391569"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 78.74)
+		(size 45.72 43.18)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "67320373-e2b3-4f96-9ef0-24979f7ffc82")
+		(property "Sheetname" "TER_CAN"
+			(at 139.7 78.0284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "TER_CAN.kicad_sch"
+			(at 139.7 122.5046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "RTR_submodule"
+				(path "/adf545d5-32fa-4c45-9a89-804aac391569"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
