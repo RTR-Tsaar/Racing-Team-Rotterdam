@@ -202,15 +202,7 @@ Om dit systeem te gebruiken op de submodule PCB zijn de volgende onderdelen nodi
 - 1x DC motor
 - 1x submodule PCB
 #### Aansluiting
+![pcb aansluiting steer by wire](Docs/Steer-by-wire%20pcb%20aansluiting.jpeg)
 
-## Troubleshooting
-### Kalibratie problemen
-Kalibratie proces te snel afgerond
-Mogelijke oorzaken
-- De verwachte stall stroom sterkte voor de stuur actuator kan te laag zijn waardoor de 
-### Problemen met stuurhoek uitlezen
-### Problemen met stuurhoek aansturen
-### CAN-bus problemen
-### Problemen met PID-regelaar
 
 > Written with [StackEdit](https://stackedit.io/).
