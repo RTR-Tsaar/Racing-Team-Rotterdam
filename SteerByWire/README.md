@@ -204,6 +204,7 @@ Om dit systeem te gebruiken op de submodule PCB zijn de volgende onderdelen nodi
 #### Aansluiting
 ![pcb aansluiting steer by wire](Docs/Steer-by-wire%20pcb%20aansluiting.jpeg)
 
-Voor meer informatie over de sub module pcb ga naar het [KiCad bestand](#./Docs)
+Voor meer informatie over de sub module pcb, download het [KiCad project](#Docs/RTR%20submodule/RTR_submodule) en open het in kicad.
+[Kicad Download Link](https://www.kicad.org/download/)
 
 > Written with [StackEdit](https://stackedit.io/).
