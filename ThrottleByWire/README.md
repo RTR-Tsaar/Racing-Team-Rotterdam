@@ -104,12 +104,31 @@ De `Throttle`-klasse is verantwoordelijk voor het uitlezen van het gaspedaal en 
 De `readThrottle()` functie is verantwoordelijk voor het uitlezen van de juiste adc kanaal voor het gaspedaal. Het retourneert de gaspedaal input als percentage die makkelijk via CAN-bus verstuurd kan worden.
 
 ## Hardware
+Dit subsysteem kan zowel op een **breadboard** als op de **custom PCB** worden uitgevoerd. Hieronder volgt een stappenplan voor beide aansluitmethoden.
 ### Breadboard aansluiting
-### PCB aansluiting
+Om dit subsysteem te gebruiken op een breadboard zijn de volgende onderdelen nodig:
+- 1x STM32C6T6a microcontroller
+- 1x ST-Link v2 connector
+- 1x 0-5v analoog gaspedaal
+- 1x SN65HVD230 CAN Tranceiver Module
+- 1x 5k ohm weerstand
+- 1x 9.84k ohm weerstand
 
-## Troubleshooting
-### Problemen met throttle uitlezen
-### CAN-bus problemen
+#### Aansluiting
+Met de bovenstaande onderdelen kan het systeem als volgt worden aangesloten:
+![breadboard aansluiting throttle by wire](/Docs/Throttle-by-wire%20breadboard%20aansluiting.png)
+
+### PCB aansluiting
+Om het systeem aan te sluiten via de sub module pcb zijn de volgende onderdelen:
+- 1x STM32C6T6a microcontroller
+- 1x ST-Link v2 connector
+- 1x 0-5v analoog gaspedaal
+- 1x submodule PCB
+#### Aansluiting
+Deze onderdelen kunnen daarna als volg worden aangesloten aan de pcb:
+![pcb aansluiting throttle by wire](/Docs/Throttle%20pcb%20wiring.jpeg)
+Voor meer informatie over de sub module pcb ga naar het [KiCad bestand](././Docs/kicad)
+
 
 
 > Written with [StackEdit](https://stackedit.io/).

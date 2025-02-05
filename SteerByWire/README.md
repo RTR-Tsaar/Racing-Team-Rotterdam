@@ -174,8 +174,34 @@ De `getCurrent()` functie leest de analoge output van de stroom sensoor met `HAL
 
 
 ## Hardware
+
+Dit subsysteem kan zowel op een **breadboard** als op de **custom PCB** worden uitgevoerd. Hieronder volgt een stappenplan voor beide aansluitmethoden.
 ### Breadboard aansluiting
+Om dit subsysteem te gebruiken op een breadboard zijn de volgende onderdelen nodig:
+- 1x STM32C6T6a microcontroller
+- 1x ST-Link v2 connector
+- 1x SN65HVD230 CAN Tranceiver Module
+- 2x 5k ohm weerstand
+- 2x 9.84k ohm weerstand
+- 1x acs712 stroomsensoor
+- 1x Nidec RE30E-1000-213-1 encoder
+- 1x MD20A of MD13S motordriver
+- 1x DC motor
+
+#### Aansluiting
+Met de bovenstaande onderdelen kan het systeem als volgt worden aangesloten:
+![breadboard aansluiting steer by wire](/Docs/Steer-by-wire%20breadboard%20aansluiting.png)
+
+
 ### PCB aansluiting
+Om dit systeem te gebruiken op de submodule PCB zijn de volgende onderdelen nodig:
+- 1x STM32C6T6a microcontroller
+- 1x ST-Link v2 connector
+- 1x Nidec RE30E-1000-213-1 encoder
+- 1x MD20A of MD13S motordriver
+- 1x DC motor
+- 1x submodule PCB
+#### Aansluiting
 
 ## Troubleshooting
 ### Kalibratie problemen
