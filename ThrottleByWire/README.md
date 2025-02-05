@@ -116,7 +116,7 @@ Om dit subsysteem te gebruiken op een breadboard zijn de volgende onderdelen nod
 
 #### Aansluiting
 Met de bovenstaande onderdelen kan het systeem als volgt worden aangesloten:
-![breadboard aansluiting throttle by wire](/Docs/Throttle-by-wire%20breadboard%20aansluiting.png)
+![breadboard aansluiting throttle by wire](Docs/Throttle-by-wire%20breadboard%20aansluiting.png)
 
 ### PCB aansluiting
 Om het systeem aan te sluiten via de sub module pcb zijn de volgende onderdelen:
@@ -126,7 +126,7 @@ Om het systeem aan te sluiten via de sub module pcb zijn de volgende onderdelen:
 - 1x submodule PCB
 #### Aansluiting
 Deze onderdelen kunnen daarna als volg worden aangesloten aan de pcb:
-![pcb aansluiting throttle by wire](/Docs/Throttle%20pcb%20wiring.jpeg)
+![pcb aansluiting throttle by wire](Docs/Throttle%20pcb%20wiring.jpeg)
 Voor meer informatie over de sub module pcb ga naar het [KiCad bestand](././Docs/kicad)
 
 
