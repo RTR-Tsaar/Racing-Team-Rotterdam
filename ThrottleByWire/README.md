@@ -127,8 +127,9 @@ Om het systeem aan te sluiten via de sub module pcb zijn de volgende onderdelen:
 Deze onderdelen kunnen daarna als volg worden aangesloten aan de pcb:
 ![pcb aansluiting throttle by wire](Docs/Throttle%20pcb%20wiring.jpeg)
 
-Voor meer informatie over de sub module pcb, download het [KiCad project](https://github.com/RTR-Tsaar/Racing-Team-Rotterdam/tree/main/Docs) en open het in kicad.
+Voor meer informatie over de sub module pcb, download het [KiCad project](https://github.com/RTR-Tsaar/Racing-Team-Rotterdam/tree/main/Docs/RTR%20submodule) en open het in kicad.
 [KiCad Download Link](https://www.kicad.org/download/)
+Voor meer informatie over de pcb onderdelen ga naar [Racing-Team-Rotterdam/Docs/Sub module components](https://github.com/RTR-Tsaar/Racing-Team-Rotterdam/tree/main/Docs/Sub%20module%20components)
 
 
 > Written with [StackEdit](https://stackedit.io/).
