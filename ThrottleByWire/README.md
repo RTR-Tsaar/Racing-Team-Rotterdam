@@ -19,7 +19,10 @@ Dit project bevat de complete software voor het throttle-by-wire sub systeem voo
 
 
 ## Kenmerken
--   
+- Gaspedaal uitlezen: Leest de positie van een elektronisch gaspedaal via een analoge ingang (ADC).
+- CAN-bus communicatie: Verstuurt de gaspedaalpositie als een percentage (0-100%) over CAN-bus.
+- Lage latentie: Geoptimaliseerde firmware voor snelle respons en minimale vertraging tussen input en output.
+- STM32-gebaseerd: Gebouwd op een STM32-microcontroller met HAL- of LL-bibliotheken.
 ## Aan de slag
 
 ## Code Uitleg
