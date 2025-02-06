@@ -1,5 +1,5 @@
 ﻿
-# Steer-by-wire
+# Throttle-by-wire
 
 ## Overzicht
 Dit project bevat de complete software voor het throttle-by-wire sub systeem voor de RU-25 van de Racing Team Rotterdam. In deze README wordt de complete code en hardware van dit project uitgelegd.
