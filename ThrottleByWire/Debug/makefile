@@ -84,8 +84,8 @@ all: main-build
 main-build: ThrottleByWire.elf secondary-outputs
 
 # Tool invocations
-ThrottleByWire.elf ThrottleByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "ThrottleByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\ThrottleByWire\ThrottleByWireC6\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ThrottleByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+ThrottleByWire.elf ThrottleByWire.map: $(OBJS) $(USER_OBJS) C:\Users\rolan\Laravel\ Projects\Racing-Team-Rotterdam\ThrottleByWire\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "ThrottleByWire.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\rolan\Laravel Projects\Racing-Team-Rotterdam\ThrottleByWire\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ThrottleByWire.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
